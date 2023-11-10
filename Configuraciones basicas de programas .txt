@@ -1,0 +1,33 @@
+- Evaluación inicial;
+
+- Folleto con los contenidos del módulo;
+
+- Infografía con los conceptos clave del módulo;
+
+- Video didáctico;
+
+- Podcast;
+
+- Actividad práctica;
+
+- Ejercicios de fijación;
+
+}https://www.twitch.tv/videos/1785418662
+https://www.youtube.com/watch?v=0oRpYfuxHnM
+https://www.youtube.com/watch?v=bTGil8qPmXo
+https://www.youtube.com/watch?v=gAvDM2vyfQw
+
+- Evaluación final: se debe alcanzar una puntuación mínima de 7 puntos sobre 10 para
+ la aprobación del módulo y el certificado del módulo, así como habilitar los contenidos del siguiente módulo.
+ 
+ --- configuracion de sdk man ----
+ winget install -e --id GnuWin32.Zip
+mkdir ~/bin
+cp /usr/bin/unzip ~/bin/zip
+curl -s "https://beta.sdkman.io" | bash
+source "/c/Users/ajink/.sdkman/bin/sdkman-init.sh"
+sdk selfupdate force
+
+Selenium driver 
+https://www.selenium.dev/documentation/webdriver/getting_started/install_drivers/
+

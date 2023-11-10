@@ -1,0 +1,15 @@
+
+Busqueda del Curso 
+
+
+SEO
+Engine de busqueda, <H1>  heading  
+<!-- This is a comment --> dejar comentarios Clean Code 
+<h1></h1> --- SEO
+<p></p> --- parrafos 
+
+propiedades del link, 
+cuando utilizar y cuando no utilizarlo 
+ href, target 
+ 
+ target -selft : se abre en al misma pestaña.

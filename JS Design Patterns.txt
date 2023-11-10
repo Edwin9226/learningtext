@@ -1,0 +1,44 @@
+JS Design Patterns
+
+Chapter 1, “Introduction to Design Patterns”: Get acquainted with the history of design patterns and
+ their significance in the programming world.
+
+Chapter 2, ““Pattern”-ity Testing, Proto-Patterns, and the Rule of Three”: Understand the process of
+ evaluating and refining design patterns.
+
+Chapter 3, “Structuring and Writing Patterns”: Learn the anatomy of a well-written pattern and how to 
+create one.
+
+Chapter 4, “Anti-Patterns”: Discover what anti-patterns are and how to avoid them in your code.
+
+Chapter 5, “Modern JavaScript Syntax and Features”: Explore the latest JavaScript language features and 
+their impact on design patterns.
+
+Chapter 6, “Categories of Design Patterns”: Delve into the different categories of design patterns: 
+creational, structural, and behavioral.
+
+Chapter 7, “JavaScript Design Patterns”: Study over 20 classic design patterns in JavaScript and their
+ modern adaptations.
+
+Chapter 8, “JavaScript MV* Patterns”: Learn about architectural patterns like MVC, MVP, and MVVM and 
+their significance in modern web development.
+
+Chapter 9, “Asynchronous Programming Patterns”: Understand the power of asynchronous programming in 
+JavaScript and various patterns for handling it.
+
+Chapter 10, “Modular JavaScript Design Patterns”: Discover patterns for organizing and modularizing
+ your JavaScript code.
+
+Chapter 11, “Namespacing Patterns”: Learn various techniques for namespacing your JavaScript code to 
+avoid global namespace pollution.
+
+Chapter 12, “React.js Design Patterns”: Explore React-specific patterns, including Higher-Order Components,
+ Render Props, and Hooks.
+
+Chapter 13, “Rendering Patterns”: Understand different rendering techniques like client-side rendering, 
+server-side rendering, progressive hydration, and Islands architecture.
+
+Chapter 14, “Application Structure for React.js”: Learn how to structure your React application for better
+ organization, maintainability, and scalability.
+
+Chapter 15, “Conclusions”: Wrap up the book with key takeaways and final thoughts.

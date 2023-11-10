@@ -1,0 +1,102 @@
+
+--LIST OF ABBREVIATIONS
+
+ACO ant colony optimization
+AMP adaptive mesh problem
+AS approximation scheme
+B2C business-to-consumer
+CNF conjunctive normal form
+CSR corporate social responsibility
+EAs evolutionary algorithms
+ERM empirical risk minimization
+EU European Union
+FMO Fenna-Matthews-Olson
+FQ-Tree fixed query tree
+Gas genetic algorithms
+GRAPE gradient ascent pulse engineering
+GUIs graphical user interfaces
+HL Hamiltonian
+ISP internet service provider
+NP nondeterministic polynomial time
+PETs privacy-enhancing technologies
+PSO particle swarm optimization
+PTAS polynomial-time approximation scheme
+RAM random-access machine
+SOFM self-organizing feature map
+SOMs self-organized maps
+SRM structural risk minimization
+SVM support vector machine
+VPNs virtual private networks
+VP-Tree vantage point tree
+
+Beneficios del servicio al cliente
+
+Que es un ALmacén?
+Un almacén es un lugar donde se combinan los inventarios de diferentes artículos con el fin de 
+cumplir con los requerimientos y expectativas de los clientes.
+
+Esta estudiado que las actividades de manejo de materiales y almacenamiento representan hasta 
+un 20-25 % de los costos de distribución Física.
+
+warehouse --x  Customer
+
+Tenemos que realizar un análisis de inventario adecuado y tener los productos necesarios, en cada 
+centro de distribución y en cada tienda, por que tenemos más de trescientas tiendas en el país.4
+se realiza u análisis a detalle para no tener lentos movimientos, por que podemos cometer errores
+y mandar inventarios que no necesitamos.
+
+** Ben-ficios económcos de un almacén?
+
+Cuando se logran obtener reducciones en  el costo logístico total, el almacén justifica 
+la inversión realizada,
+Los beneficios económicos principales de almacenamiento son:
+
+2.1 Consolidación de materiales.
+
+planta hih 1-------
+planta Qro 1-------	Almacén Monterrey----- x Clientes
+planta Qro 2-------
+Planta chih 2------
+
+2.1.1 Dispersión de Volumen
+En esta operación se recibe un solo embarque y se reparte hacia varios destinos finales,
+
+			-------						------x SAltillo
+planta chih 1-------	Almacén Monterrey----- x Reinosa
+			------						------x Monclava
+			------						-----x Tampico
+										-----x Clientes locales de Monterrey-----
+
+2.1.2 Económias de escala 
+LA economía de escala se da al transportar la embarcación consolidada mas grande.
+
+2.1.3 Economías de distancia.
+
+Los principios de transporte permiten que a mayor distancia se puede distribuir el costo fijo 
+entre mas kilometros, recuerda que el costo fijo incluye admnistración d ela programación, 
+costo de equipo, acomodo de vehículos, y otros mas que no cambian y al distribuirlos en 
+más kilometros disminuyen los costos unitarios. aprovechar la capacidad del camión.
+
+2.2 Almacenamiento estacional 
+Beneficio se refiere a que el almacenamiento atiende la Producción o demanda estacional, como 
+por ejemplo los juguetes son productos que se venden mas en una fecha especifico, pero se producen
+ durante el año, mismo caso para los pavos enteros.En ambas situaciones se necesita almacenar el 
+ invetario
+
+2.3 Logística inversa 
+La mayor parte de l trabajo relacionado con la logística inversa se realiza en el almacén, la 
+logística inversa se encarga de todo lo relacinado con la administración de la cadena de 
+abastecimiento en el movimiento de materiales de el usuario o consumidor hacia el fabricante.
+Las Actividades principales de la logística inversa según Bowerson, Closs&Cooper 2007 son:
+
+1.- Devoluciones. Diseño fácil para flujo rápido.
+2.- Reproducciones Facilitar el flujo inverso después de fabricado.
+3.- Re comercializar. Reventa el Producto una vez que termina su vida útil.
+4. Reciclar. Reutilizar el producto una vez que termina su vida útil.
+5.- Eliminación: eliminar cuan do ya n tiene uso el producto
+
+El flujo de dinero y de los productos van contrario uno del otro, en la logística inversa el 
+flujo del dinero va del fabricante al cliente y el flujo del producto del cliente al fabricante
+ por alguna devolución.
+
+BEneicios en servicios al Cliente? 

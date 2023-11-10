@@ -1,0 +1,77 @@
+Github Actions:_ Become the JEdi of CI/CD 2023
+
+What are Workflows?
+
+Plan 
+Design 
+Build 
+test 
+Lauch 
+Support
+
+Automatically check if the code is correct, if the website still works as it should , and then, maybe,
+update the live website with those changes. All of this, without any human intervention.
+
+** What are actions?
+
+Actions are predefined pieces of code that perform specific tasks, Instead of reinventing the wheel
+every time, the Elopers can use these actions to automate common processes, amking their workflows 
+more efficient and streamlined.
+
+Testing a piece of software, an action might be i place to autoamtically 
+deplo that software to a live server, making it available for users worldwide.
+
+Actions are ready-to-use components that carry out specialized tasks. It´s a specific instruction, a 
+singular action to be performed. Within a broader process, steps are ther building blocks that ensure 
+everything comes together correctly. 
+
+* Check the neww code for errors 
+* Merge this new code with the existing one
+* Notify the team that the update was succesful
+
+Steps are the individual tasks that make up  a large process.
+
+A software process relies on each step being correctly exeuted. they are the fundamental  building blocks 
+ensuring eerithing works as it should 
+
+
+** What are jobs?
+Jobs aredistinct unit of work that can be executed. They can run one after the other or asometimes even at 
+the same time, depending on the requirements. jobs are the segments or chunks that make up a large process.
+Just as a realy team can´t with without each runner doing their part, a software workflow depends on each 
+job being executed correctly and efficiiently 
+
+they are the individual, crucial segments ensuring the entire process is succesful
+
+
+
+** What are runners?
+it´s the enviroment or machine where specific tasks, jobs, or operations are carried out.
+Runners are the platforms or machines that execute the tasks we set for them.
+
+
+** Continuous Deployment (CD)
+
+- CD autokmatically deploys your code to productioin withut maual intervention
+- CD is like having a personañ chef who always serves you the best meal.
+- Personal Chefs use the freshest ingredients, just  as CD uses the latest and greatest code to ensure your app 
+is  up-to-date and running smoothly
+- CD takes care of the entire deployment process, from testing to mnitoring production 
+- With CD, you can sit back, relax, and enjoy the best version  of your app served fresh every time.
+
+
+
+** Event-Driven Workflows 
+
+
+- Event-dribven Workflows in GIthub Actions trigger automatically base on specific events, just like a party
+celebrates something special.
+- Automation in event-driven workflows ensures smooth and efficient running 
+- Custom workflows can be  created based on specific conditions to customize the development process in 
+unique and creative ways
+- Examples of event-driven workflows include automatically running tests when code is pushed or automatically 
+deploying a ne wversion of software when a new release is created.
+- Jump on board the ecvent-driven workflow train with Github Actions for a better development process
+and happier party guests!
+
+** Support 

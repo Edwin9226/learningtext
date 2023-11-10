@@ -1,0 +1,88 @@
+Practical DATA Science  Projects: From Analysis to Insights
+
+In this project we will:
+
+* Learn and understand about Regression 
+* Learn how toi clean and process dataset (outlier, missing values, etc.)
+* Learn about Correlation and feature selection
+* Learn About Artificial neural Networks
+* Deploy our mdell as a Flask Web APp
+
+
+Predicting Diamon Sale Price using Neural Network Regression
+
+X APrt 1 (i). Regression and multipe Linear Regression 
+
+Regression is a method which measures the nature and extent of the relationship between two or more 
+variables, thus enables us to make predictions.
+
+Regresion data exist all around us, and within us as well:
+
+- Teen Bith Rate and Poverty level Data 
+- Rainfall measurements 
+- Stock Prices 
+- Number of sunspots
+- Annual Rentail sales 
+- Testig Automobiles
+
+In this project, we are going to look at such a reression problem, predicting the sale price of a diamond.
+
+X Part I(ii): Diamond and its Sales Price
+
+A Diamond has various features and characteristics, which are measured and analysed to decide on a market value.
+Let us look at some of them:
+
+* Cut: refers to one of then 10 or so most comonm diamond cuts.
+* Cololur: Clear diamonts are graded D-Z. This higher letter more yellowish but are often better values since 
+colour is hard to determine once in a ring.
+* Clarity: refers the inclusions (i.e, internal flaws) in the diamonds seen though a jeweller´s loupe or
+microscope. Fewer and smaleer are better.
+* Eye-clean: refers to the blemishes or inclusions can see with the naked eye. There are 10 grades.
+
+**-- About Dataset 
+
+Here is a brief rundown of the columns as well as links to some background information to get you talking like an expert in no time.
+
+- cut refers to one of the 10 or so most common diamond cuts. This dataset has an additional one called the
+ 'Cushion Modified'.
+Diamond Shapes
+- color Clear diamonds are graded D-Z. The higher letters more yellowish but are often better values since 
+color is hard to determine once in a ring.
+- clarity refers the inclusions (i.e., internal flaws) in the diamonds seen though a jewelers loupe or
+ microscope. Fewer and smaller are better.
+- carat_weight Refers to the mass of the diamond. It's loosely connected with dimension of a diamond but cut 
+and cut_quality tends to play an equally large if not larger role.
+- cut_quality refers the GIA Cut Grading System which was developed in 2005 and is de facto standard.
+- lab is the grading lab. The big three are GIA, IGI and HRD. Each diamond gets a lab certificate that looks 
+like this.
+- polish and symmetry are what you would expect.
+- eye-clean refers to the blemishes or inclusions can see with a the naked eye. There are 10 grades.
+- culet_size is the size of the circle you'd see if you looked straight down. None is ideal because it 
+affects the amount of light that gets reflected.
+- culet_condition indicates if the culet has any chipping, which is why some diamonds don't close to a 
+point but rather a very small flat spot.
+- fancy_color_ columns have to do with colored diamonds. Formerly, extremely rare but now common, popular, 
+and almost always lab grown.
+- fluor columns refer to the effect of long wave UV light. According to GIA 25-35% have it; for ~10% of
+ those it's noticeable to an expert.
+- depth_percentandtable_percent are the relative measurements of the flat part of the top and the depth. 
+This varies somewhat by cut.
+- meas_length, meas_width, meas_depth are the absolute measurements of stone.
+- girdle min/max are where the id of a stone is engraved they also are where the meets the setting and play 
+a role in reflection. There are 9 values ranging from extremely thin to extremely thick
+- fancy columns refer to colored diamonds. They can be natural like the extremely rare blue diamonds, or lab 
+grown. The columns refer to the colors, secondary colors and their intensity.
+- total_sales_price is priced in dollars.
+
+
+
+
+
+X PArt I (iii): The Dataset 
+
+* link: https://www.kaggle.com/datasets/hrokrin/the-largest-diamond-dataset-currely-on-kaggle
+
+* this dataset has 219703 samples of very kind of diamond 
+* The task at hand Predicting the sale price in dollars.
+* Let us explore the different features in the dataset and try to understand how we can proceed with model 
+building.

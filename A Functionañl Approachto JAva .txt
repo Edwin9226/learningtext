@@ -1,0 +1,23 @@
+A Functionañl Approachto JAva 
+
+You will learn about the concepts and importance of the following aspects of FP: 
+
+* Composition Build modular and easy composable blocks.
+* Expressiveness: Write more concise code that clearly expresses its intent.
+* SAfer code: Create safer data structures without side effects that don't need to deal with race
+conditions or locks, which are hard to use without introducing bugs.
+* Modularity: Break down larger  projects into more easily manageable modules.
+* Maintainability: Use smalller functional block with less interconnection to make changes and refactoring 
+safer without breaking other parts of your code.
+* Data manipulation  : BUild efficient data manipulation pipelines wit less complexity.
+* Performance: Immutability and predictability allow you to scale horizontally with paralelism without 
+much thought about it.
+
+** Advantages of Functional Programming
+	- Simplicity
+	- Consistency
+	- (Mathematical) correctness
+	- safer concurrency
+	- Modularity
+	- Testability
+	

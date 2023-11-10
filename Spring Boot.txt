@@ -1,0 +1,164 @@
+angular 15 o 16.
+
+ng -v
+
+
+Features 
+n 
+** Support of core technologies and key programming concepts (events handling , i18n, data binding, aop, 
+Data VAlidation, work with resources, dependency injection, work with accesses)
+
+* Spring MVC & Spring WebFlux
+* Features for testing (mock objects, TestContext framewoork, Spring Mvc Test, WebTestClient)
+* Data Acces (transactions DAO, JDBC, ORM , MArshalling XML)
+*Integration (remoting, JMS, JCA, JMX, email, Tasks, scheduling, cache)
+*Embeded Tomcat web server
+* Powerful repository and custom object-mapping abstractions
+* Comprehensive and extensible support for both Authentication and Authorization
+* Support of transaction management
+* Distributed/ versioned configuration
+* Load balancing
+
+AOP is programming paradigm that aims to increase modularity by allowing the separation of cross-cutting
+ concerns.
+ 
+ DAta validatio work with resources, dependency injection, work with axises to ensure security.
+ Integration remoting is this JAva MEssages service.
+ 
+ 
+ * SPring Framework Architecture
+ * Inversion de Control
+ * DEpendency Injection
+ * Spring IoC container
+ * Application Context and child types
+ * Spring Context
+ * Spring Beans
+ * Scopes of Spring BEans 
+ * Spring Expressions LAnguages 
+ 
+ 
+ SPring Framework Architecture
+ - Core that power featuressuch as inversion of control and dependency injections beanas.
+ - Beans provides bean factory which is sophisticated implementation of the factory pattern
+ - context build son core and beans and provides a medium to access defined objects.
+ - Support provides support for thirdparty interactions such as caching, mailing and template engines.
+ 
+ inversion de ControlÑ In traditional programming, the flow of the business logic is determined by objects 
+ that are statically. Inversion od Control the flow depends on the graph that is built up 
+ during program execution. Such a dynamic flow is made possible by obkject interactions that are defined 
+ through abstractions.
+ 
+ Dependency Injection 
+  is just one of the possible ways how we can implement inversio of control. DI is a ppattern we can use to 
+  implement 1IOC where the control being Inverted is set in a object´s dependencies. Connecting objects 
+  eith others objects or injecting objects into other objects is done by an assembler rather than by the objects 
+  themselves.
+  
+  Constructor injection where dependencies are provided through a client class constructor. Setter injection 
+  wheer the lient esposesa setter method which accepts the dependency interface injection where the dependencies
+  interfacesn provides an injector method that will inject the dependency into any client passed to it 
+  
+  - Spring Ioc Container 
+  Is responsible to instantiate, configure and assemble the objects. The main task performed by IOC container
+  are to Instantiate the application class to configure the object to ssemble the dependencies between the 
+  objects.
+  
+  IOC is a mechanis to achieve loose coupling between objects dependencies to achieve loose coupling and 
+  dynamic bindling of the objects at runtime objects, dependencies are injected by other assembler.
+  
+  We have entity in our program that is in charge of the life cycle of our objets and dependencies dbetween
+  them.
+  
+  
+  - Appication Context 
+  Is a Child interfaces ofbean factory interface. Some of the usefu child interfaces of applicaction contexts 
+  are cong¿figurable application context and ConfigurableApplicationContext and WebAPplication Context.
+  
+  - Class AnnotationCofigApplicationContext 
+  Atandalone application context, accepting component classes as input @Configuration 
+  
+  - Class ClassPAthXmlApplicationContext
+  Taking the context definition files from the class path, iinterpreting plain paths as class path resources 
+  names that include sthe package path
+  - Class FileSystemXmlApplicationContext 
+  - class XmlWebA[pplicationContext
+  
+  * Spring Context 
+  Is a programming construct that framework uses t access components from the inversion of control container 
+  where they are cache.
+  
+  
+  * Spring Beans (BEans Scopes )
+  
+  - Singleton: Only one nstance of the bean will be created for each container. This is the default scope 
+  for spring beans. hile using this scope, make sure bean doesn´t have shared instance variables otherwise
+  it might lead to data inconsistency issues.
+  
+  - prototype : A  new instance will be create every time the bean is requested.
+  
+  - request: this is name as prototype scpe, however it´s meant to be used for web applications, A new instance 
+  of the bean will be cerated for each HTTP request.
+  
+  - Session : a new bean will be created for each http session by the container
+  - Application: container creates one instance per web application runtime
+  - websocket - the same instance of the bean is then returned whenever that bean is accessed during 
+  entire websocket session..
+  
+  What is bean scope?
+  Bean scope refers to the lifecycle of bean.
+  That means swhen the object of bean will be instantiated, how long does the wil be created for that object leave and how many bean sprout?
+  
+  
+  * Spring Expression Language
+  Is a powerful expression language that supports querying and manipulating an object graph at runtime 
+  
+  --- Component
+  @Controller
+  @Service
+  @Repository
+  
+ ** JWT Authentication with Spring Boot 3.0
+  - we will see how to configure inMemory user and jwt authentication using latest spring boot 3.0
+  - We wwill reate one protected endpoint and try to secureendpoint using spring boot security.
+  
+  
+  
+  *-* Basic oin Rest and Sprint Annotation 
+  
+The @RequestMapping annotation is used to map incoming HTTP request to methods in the controller
+class. Instead of using the @RequestMapping annotation you can use the following shortcut annotations
+that are mapped to the HTTP method:
+
+* @GetMapping
+* @PostMapping
+* @PutMapping
+* @DeleteMapping
+* @PatchMapping
+
+The RequestMapping will be used at the class level of the Controller class. The request mapping contains a
+PathPattern which is the URL path, example:
+@RequestMapping("/service/version").
+Source: https://docs.spring.io/spring-framework/docs/6.0.6/reference/pdf/spring-framework.pd
+
+ The @Autowired annotation is about type injecting, sometimes combined with additional semantic
+qualifiers. You can apply @Autowired annotation to constructors, methods and fields. The @Resource
+annotation can only be used for fields and property setter methods
+
+The Controller and ControllerAdvice classes can have an @ExceptionHandler method that will handle
+exceptions from other methods in the controller class. It is possible to specify the exception classes that the
+ExceptionHandler will handle. If you specify an ExceptionHandler in a ControllerAdvice class, the exception
+handling will be global.
+The spring framework does not automatically handle exception because it considers exception handling to
+be application specific
+
+If the @PostConstruct and @PreDestroy annotation is used the methods are invoked in the Spring lifecycle.
+For example: pre-populated upon initialization and cleared upon destruction .
+
+ The Environment object provides a straightforward interface for accessing properties. It represents the
+application environment and provides an interface to for example properties. The @Autowired annotation
+is used to inject the environment
+
+ The @PathVariable, for access to URI template variables
+ 
+ The @RequestBody, for access to the HTTP request body. The body content is converted to the declared
+method argument type.

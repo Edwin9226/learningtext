@@ -1,0 +1,1060 @@
+
+React 18 Design Patterns and Best Practices, Fourth Edition:
+ Design, build, and deploy production-ready
+ web applications with ease and create powerful user experiences
+ 
+Chapter 1: Taking Your First Steps with React
+Chapter 2: Introduction to TypeScript
+Chapter 3: Cleaning Up Your Code
+Chapter 4: Exploring Popular Composition Patterns
+Chapter 5: Writing Code for the Browser
+Chapter 6: Making Your Components Look Beautiful
+Chapter 7: Anti-Patterns to Be Avoided
+Chapter 8: React Hooks
+Chapter 9: React Router
+Chapter 10: React 18 New Features (New Chapter)
+Chapter 11: Node 18 New Features (New Chapter)
+Chapter 12: Managing Data
+Chapter 13: Server-Side Rendering for Fun and Profit
+Chapter 14: Understanding GraphQL with a Real Project
+Chapter 15: MonoRepo Architecture (New Chapter)
+Chapter 16: Improving the Performance of Your Applications
+Chapter 17: Testing and Debugging
+Chapter 18: Deploying to Production
+
+** How React element work.
+if you want to use React effectively – the element.
+they leave the responsibility of keeping the interface updated to the developer, 
+who has to manage the creation and destruction of the DOM elements manually.
+
+This process is called reconciliation, and it is used by both React DOM and React
+ Native to create the UIs of their respective platforms.
+ 
+ **Unlearning everything
+ 
+ when it comes to starting to work with complex data structures, things change. 
+ Templating systems and their Domain-Specific Language (DSL) offer a subset of 
+ features, and they try to provide the functionalities of a real programming language
+ without reaching the same level of completeness. 
+ 
+ React tries to move a step forward by putting the templates where they belong – next
+ to the logic. The reason it does that is that React suggests you organize your 
+ applications by composing small bricks called components.
+ 
+ There is another concept that is pretty controversial and hard to accept, and that
+ the engineers behind React are trying to push to the community: moving the styling 
+ logic inside the component, too.
+ 
+  The end goal is to encapsulate every single technology used to create our components
+  and separate the concerns according to their domain and functionalities.
+  
+  ** Understanding JavaScript fatigue
+  
+  you are forced to deal with package managers, transpilers, module bundlers, and an 
+  infinite list of different libraries.
+  
+  There are two scripts because React is split into two packages:
+
+react: Implements the core features of the library
+react-dom: Contains all the browser-related features
+
+It is the nature of the web to evolve at a breakneck pace and change according to the
+ needs of both users and developers. This is the way our environment has worked since
+ the beginning and is what makes it very exciting.
+ 
+ It is the nature of the web to evolve at a breakneck pace and change according to 
+ the needs of both users and developers. This is the way our environment has worked
+ since the beginning and is what makes it very exciting.
+ 
+ ***   Introducing TypeScript
+Typescript features
+Convert JavaScript code into TypeScript
+Types
+Interfaces
+Extending interfaces and types
+Implementing interfaces and types
+Merging interfaces
+Enums
+Namespaces
+Template Literal Types
+TypeScript Configuration File
+
+function isPalindrome(word: string): boolean {
+  const lowerCaseWord = word.toLowerCase()
+  const reversedWord = lowerCaseWord.split('').reverse().join('')
+  return lowerCaseWord === reversedWord
+}
+
+type User = {
+  username: string
+  email: string
+  name: string
+  age?: number
+  website: string
+  active: boolean
+}
+const user: User = {
+  username: 'czantany',
+  email: 'carlos@milkzoft.com',
+  name: 'Carlos Santana',
+  age: 33,
+    website: 'http://www.js.education',
+  active: true
+}
+// Let's suppose you will insert this data using Sequelize...
+models.User.create({ ...user }}
+
+You can name type as you want, but a good practice to follow is to
+ add a prefix of T, so, for example, the User type will become TUser.
+ 
+ * Interfaces
+ 
+  Interfaces can be used to describe the shape of an object or function 
+  signature just like types, but the syntax is different:
+  
+  interface User {
+  username: string
+  email: string
+  name: string
+  age?: number
+  website: string
+  active: boolean
+}
+  You can name an interface as you want, but a good practice to follow is 
+  to add a prefix of I.
+  
+  An interface can also be extended, implemented, and merged.
+ 
+ ** Implementing interfaces and types
+ 
+ // Implementing an interface
+interface IWork {
+  company: string
+  position: string
+}
+class Person implements IWork {
+  name: 'Carlos'
+  age: 35
+}
+// Implementing a type
+type TWork = {
+  company: string
+  position: string
+}
+class Person2 implements TWork {
+  name: 'Cristina'
+  age: 34
+}
+// You can't implement a union type
+type TWork2 = { company: string; position: string } | { name: string; age: number } 
+class Person3 implements TWork2 {
+  company: 'Google'
+  position: 'Senior Software Engineer'
+  
+}
+
+** Merging Interfaces
+
+interface IUser {
+  username: string
+  email: string
+  name: string
+  age?: number
+  website: string
+  active: boolean
+}
+interface IUser {
+  country: string
+}
+const user: IUser = {
+  username: 'czantany',
+  email: 'carlos@milkzoft.com',
+  name: 'Carlos Santana',
+  country: 'Mexico',
+  age: 35,
+  website: 'http://www.js.education',
+  active: true
+}
+
+** Enums
+
+Enums permit a developer to define a set of named constants. Using enums can make
+ it easier to document intent, or create a set of distinct cases.
+ I like to use them to define a palette of colors in a theming system.
+ 
+ ** Namespaces
+  A namespace is a region out of which things cannot escape. 
+Namespaces are very useful to organize variables, functions, interfaces or classes 
+and group them together within a local scope in order to avoid naming conflicts 
+between components in the global scope.
+
+import styled from 'styled-components'
+  export namespace CSS {
+    export const InputWrapper = styled.div`
+      padding: 10px;
+      margin: 0;
+      background: white;
+      width: 250px;
+    `
+    export const InputBase = styled.input`
+      width: 100%;
+      background: transparent;
+      border: none;
+      font-size: 14px;
+    `
+   }
+   
+   Then when I need to use it, I consume it like this:
+
+    import React, { ComponentPropsWithoutRef, FC } from 'react'
+    import { CSS } from './Input.styled'
+    export interface Props extends ComponentPropsWithoutRef<'input'> {
+      error?: boolean
+    }
+    const Input: FC<Props> = ({
+      type = 'text',
+      error = false,
+      value = '',
+      disabled = false,
+      ...restProps
+    }) => (
+        <CSS.InputWrapper style={error ? { border: '1px solid red' } : {}}>
+          <CSS.InputBase type={type} value={value} disabled={disabled} {...restProps} />
+        </CSS.InputWrapper>
+      )
+	  
+**Template Literals
+
+Template literals types in TypeScript are based on string literals types and may be 
+expanded into many strings using unions
+
+I normally like to use these types to define a Theme name, for example:
+
+  type Theme = 'light' | 'dark' 
+Or to delimit sizes that can be used for button sizes, fonts, etc.
+
+  type Size = 'sm' | 'md' | 'lg' | 'xl'
+  
+  ** TypeScript Configuration File
+  
+  https://www.typescriptlang.org/tsconfig
+  
+  **** Cleaning Up Your Code
+  
+-  What is JSX and why should we use it?
+- What is Babel and how can we use it to write modern JavaScript code?
+- The main features of JSX and the differences between HTML and JSX
+- Best practices to write JSX in an elegant and maintainable way
+- How linting, and ESLint in particular, can make our JavaScript code consistent across applications and teams
+- The basics of functional programming and why following a functional paradigm will make us write better 
+React components
+
+React provides two ways to define our elements.
+
+Babel can compile ES6 code into ES5 JavaScript, as well as compile JSX into JavaScript functions. 
+This process is called transpilation because it compiles the source into a new source rather than into 
+an executable.
+
+To install Babel, we need to install @babel/core and @babel/node as follows:
+
+npm install -g @babel/core @babel/node
+
+Luckily, there are some very useful presets of configurations that we can easily install and use:
+
+npm install -g @babel/preset-env @babel/preset-react
+
+*** Creating our first element
+
+Since React 17, React.createElement('div') is deprecated, now internally using react/jsx-runtime to render 
+the JSX, meaning that we will have something such as _jsx('div', {}). Basically, this means that you don't
+ need to import the React object anymore in order to write JSX code.
+
+** DOM elements and React components
+
+With JSX, we can create both HTML elements and React components; the only difference is whether or not they 
+start with a capital letter.
+
+** Props
+
+<img src="https://www.ranchosanpancho.com/images/logo.png" alt="Cabañas San Pancho" />
+The equivalent in JavaScript would be as follows:
+
+_jsx("img", { 
+  src: "https://www.ranchosanpancho.com/images/logo.png", 
+  alt: "Cabañas San Pancho" 
+})
+This is far less readable, and even with only a couple of attributes, it is harder to read without a bit of
+ reasoning.
+ 
+ ** Children 
+ JSX allows you to define children to describe the tree of elements and compose complex UIs.
+ A basic example is a link with text inside it, as follows:
+
+<a href="https://ranchosanpancho.com">Click me!</a>
+This would be transpiled into the following:
+
+_jsx( 
+  "a", 
+  { href: "https://ranchosanpancho.com" }, 
+  "Click me!" 
+)
+
+** Difference with Html 
+
+* Attributes
+
+For example, instead of class, we have to use className, and instead of for, we have to use htmlFor, as follows:
+
+<label className="awesome-label" htmlFor="name" />
+{class and for are reserved words in JS.
+
+Style
+
+A pretty significant difference is the way the style attribute works.
+The style attribute does not accept a CSS string as the HTML parallel does, but it expects a JavaScript 
+object where the style names are camelCased:
+
+<div style={{ backgroundColor: 'red' }} />
+
+As you can see, you can pass an object to the style prop, meaning you can even have your styles in a separate variable if you want:
+
+const styles = {
+  backgroundColor: 'red'
+} 
+<div style={styles} />
+
+This is the best way to have better control of your inline styles.
+
+*Root
+Let's look at a simple example:
+
+<div />
+<div />
+This gives us the following error:
+
+Adjacent JSX elements must be wrapped in an enclosing tag.
+Also, React now has a new feature called Fragment that also works as a special wrapper for elements. It can
+ be specified with React.Fragment:
+
+import { Fragment } from 'react'
+return ( 
+  <Fragment>
+    <h1>An h1 heading</h1> 
+    Some text here. 
+    <h2>An h2 heading</h2> 
+    More text here.
+    Even more text here.
+  </Fragment>
+)
+Or you can use empty tags (<></>):
+
+return ( 
+  <>
+    <ComponentA />
+    <ComponentB />
+    <ComponentC />
+  </>
+)
+
+* Spaces
+<div> 
+  <span>My</span> 
+  {' '}
+  name is
+  {' '} 
+  <span>Carlos</span> 
+</div>
+As you may have noticed, we are using an empty string wrapped inside a JavaScript expression to force 
+the compiler to apply a space between the elements.
+
+* Boolean Attributes
+This means that if we want to set an attribute to false, we have to declare it explicitly as false:
+
+<button disabled /> 
+React.createElement("button", { disabled: true })
+The following is another example of the Boolean attribute:
+
+<button disabled={false} /> 
+React.createElement("button", { disabled: false })
+
+* Spread attributes
+
+An important feature is the spread attribute operator (...), which comes from the rest/spread properties 
+for ECMAScript proposal, and is very convenient whenever we want to pass all the attributes of a JavaScript
+ object to an element.
+ 
+ const attrs = { 
+  id: 'myId',
+  className: 'myClass'
+}
+   
+return <div {...attrs} />
+
+* Templates Literals
+
+Templates literals are string literals allowing embedded expressions. You can use multiline strings and string interpolation features with them.
+
+Template literals are enclosed by the backtick (` `) character instead of double or single quotes. Also, template literals can contain placeholders. You can add them using the dollar sign and curly braces (${expression}):
+
+const name = `Carlos`
+const multilineHtml = `<p>
+ This is a multiline string
+ </p>`
+console.log(`Hi, my name is ${name}`)
+
+
+** Common patterns
+
+* Multiline 
+unction is because of its XML-like syntax, and because balanced opening and closing tags are perfect to represent 
+a tree of nodes.
+
+<div> 
+  <Header /> 
+  <div> 
+    <Main content={...} /> 
+  </div> 
+</div>
+
+The following example works fine because the div element is on the same line as the return:
+
+return <div />
+The following, however, is not right:
+
+return 
+  <div />
+The reason for this is that you would then have the following:
+
+return
+_jsx("div", null)
+This is why you have to wrap the statement in parentheses, as follows:
+
+return ( 
+  <div /> 
+)
+
+* Multi-properties
+A common solution is to write each attribute on a new line, with one level of indentation, and 
+then align the closing bracket with the opening tag:
+
+<button 
+  foo="bar" 
+  veryLongPropertyName="baz" 
+  onSomething={this.handleSomething} 
+/>
+
+* Conditionals
+
+Suppose we want to show a logout button only if the user is currently logged in to our application.
+
+A simple snippet to start with is as follows:
+
+let button
+  
+if (isLoggedIn) { 
+  button = <LogoutButton />
+} 
+  
+return <div>{button}</div>
+This works, but it is not very readable, especially if there are multiple components and multiple conditions.
+
+In JSX, we can use an inline condition:
+
+<div> 
+  {isLoggedIn && <LoginButton />} 
+</div>
+
+let button
+if (isLoggedIn) { 
+  button = <LogoutButton />
+} else { 
+  button = <LoginButton />
+} 
+  
+return <div>{button}</div>
+Alternatively, and better still, we can use a ternary condition that makes the code more compact:
+
+<div> 
+  {isLoggedIn ? <LogoutButton /> : <LoginButton />} 
+</div>
+
+where the ternary is used to show a Loading label if the component is fetching the data, or Load More inside a button depending on the value of the isFetching variable:
+
+<button [...]> 
+  {isFetching ? 'Loading...' : 'Load More'} 
+</button>
+Let's now look at the best solution for when things get more complicated and, for example, we have to check more than one variable to determine whether to render a component or not:
+
+<div>
+  {dataIsReady && (isAdmin || userHasPermissions) && 
+    <SecretData />
+  }
+</div>
+
+In this case, it is clear that using the inline condition is a good solution, but the readability is strongly impacted. Instead, we can create a helper function inside our component and use it in JSX to verify the condition:
+
+const canShowSecretData = () => { 
+  const { dataIsReady, isAdmin, userHasPermissions } = props
+  return dataIsReady && (isAdmin || userHasPermissions)
+} 
+  
+return (
+  <div> 
+    {this.canShowSecretData() && <SecretData />} 
+  </div>
+)
+
+
+The same applies to computed properties. Suppose you have two single properties for currency and value. Instead of creating the price string inside render, you can create a function:
+
+const getPrice = () => { 
+  return `${props.currency}${props.value}`
+}
+   
+return <div>{getPrice()}</div>
+This is better because it is isolated and you can easily test it if it contains logic.
+
+The first solution is render-if, which we can install with the following:
+
+
+Going back to conditional statements, other solutions require using external dependencies.
+npm install --save render-if
+
+We can then easily use it in our projects, as follows:
+
+const { dataIsReady, isAdmin, userHasPermissions } = props
+const canShowSecretData = renderIf( 
+  dataIsReady && (isAdmin || userHasPermissions) 
+);
+   
+return (
+  <div> 
+    {canShowSecretData(<SecretData />)} 
+  </div> 
+);
+Here, we wrap our conditions inside the renderIf function
+
+One goal is to never add too much logic inside our components. Some of them will require a bit of it, but we 
+should try to keep them as simple as possible so that we can easily spot and fix errors.
+
+We should at least try to keep the renderIf method as clean as possible and to do that, we can use another 
+utility library, called react-only-if, which lets us write our components as if the condition is always true
+by setting the conditional function using a Higher-Order Component (HOC).
+
+npm install --save react-only-if
+Once it is installed, we can use it in our apps in the following way:
+
+import onlyIf from 'react-only-if'
+
+const SecretDataOnlyIf = onlyIf(
+  ({ dataIsReady, isAdmin, userHasPermissions }) => dataIsReady && 
+  (isAdmin || userHasPermissions)
+)(SecretData)
+const MyComponent = () => (
+  <div>
+    <SecretDataOnlyIf 
+      dataIsReady={...}
+      isAdmin={...}
+      userHasPermissions={...}
+    />
+  </div>
+)
+export default MyComponent
+
+As you can see here, there is no logic at all inside the component itself.
+
+We pass the condition as the first parameter of the onlyIf function, and when the condition is matched,
+ the component is rendered.
+
+The function used to validate the condition receives the props, state, and context of the component.
+
+* Loops
+
+A very common operation in UI development is to display lists of items. 
+ we can use any JavaScript expressions inside curly braces, and the most common way to generate an array 
+ of elements, given an array of objects, is to use map.
+ 
+ To create an unordered list to show the users, you can do the following:
+ 
+ <ul> 
+  {users.map(user => <li>{user.name}</li>)} 
+</ul>
+
+This snippet is incredibly simple and incredibly powerful at the same time, where the power of HTML and 
+JavaScript converge.
+
+* Control statements
+
+Conditionals and loops are very common operations in UI templates, and you may feel wrong using the 
+JavaScript ternary or the map function to perform them
+
+In general, we aim to remove all the logic from our components, and especially from our render methods, but 
+sometimes we have to show and hide elements according to the state of the application, and very often we have
+ to loop through collections and arrays.
+ 
+ Let's see how it works.
+
+First of all, we have to install it:
+
+npm install --save jsx-control-statements
+Once it is installed, we have to add it to the list of our Babel plugins in our .babelrc file:
+
+"plugins": ["jsx-control-statements"]
+
+A conditional statement written using the plugin looks like the following snippet:
+
+<If condition={this.canShowSecretData}> 
+  <SecretData /> 
+</If>
+This gets transpiled into a ternary expression as follows:
+
+{canShowSecretData ? <SecretData /> : null}
+
+The If component is great, but if, for some reason, you have nested conditions in your render method, it can
+ easily become messy and hard to follow. This is where the Choose component comes in handy:
+
+<Choose> 
+  <When condition={...}> 
+    <span>if</span> 
+  </When> 
+  <When condition={...}> 
+    <span>else if</span> 
+  </When> 
+  <Otherwise> 
+    <span>else</span> 
+  </Otherwise> 
+</Choose>
+
+Please note that the preceding code gets transpiled into multiple ternaries.
+
+Finally, there is a component (always remember that we are not talking about real components but just 11
+syntactic sugar) to manage the loops that is also very convenient:
+
+<ul> 
+  <For each="user" of={this.props.users}> 
+    <li>{user.name}</li> 
+  </For> 
+</ul>
+
+there is another plugin to install: eslint-plugin-jsx-control-statements.
+
+The preceding code gets transpiled into a map function – no magic there.
+
+* Sub-rendering
+
+It is worth stressing that we always want to keep our components very small and our render methods
+ very clean and simple. olvidi y trabajo.
+ 
+ However, that is not an easy goal, especially when you are creating an application iteratively, and in the 
+ first iteration,  you are not sure exactly how to split the components into smaller ones
+ 
+ const renderUserMenu = () => { 
+  // JSX for user menu 
+} 
+   
+const renderAdminMenu = () => { 
+  // JSX for admin menu 
+} 
+   
+return ( 
+  <div> 
+    <h1>Welcome back!</h1> 
+    {userExists && renderUserMenu()} 
+    {userIsAdmin && renderAdminMenu()} 
+  </div> 
+)
+
+For example, in the Redux real-world examples, a sub-render method is used to render the load more button.
+
+**Styling code
+
+In this section, you will learn how to implement EditorConfig and ESLint to improve your code quality
+ by validating your code style.
+ 
+ * Editor Config 
+ EditorConfig helps developers to maintain consistent coding styles between different IDEs.
+
+
+** Eslint 
+
+- Installation
+
+npm install -g eslint eslint-config-airbnb eslint-config-prettier eslint-plugin-import 
+eslint-plugin-jsx-a11y eslint-plugin-prettier eslint-plugin-react
+
+Once the executable is installed, we can run it with the following command:
+
+eslint source.ts
+
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "airbnb",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "standard-with-typescript"
+  ],
+  "settings": {
+    "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
+  "overrides": [],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+	"project": ["tsconfig.json"],
+    "sourceType": "module"
+  },
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["react", "@typescript-eslint", "prettier"],
+  "rules": {
+    "semi": [2, "never"],
+    "@typescript-eslint/class-name-casing": "off",
+    "@typescript-eslint/interface-name-prefix": "off",
+    "@typescript-eslint/member-delimiter-style": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/ban-ts-ignore": "off",
+    "@typescript-eslint/no-use-before-define": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "no-restricted-syntax": "off",
+    "no-use-before-define": "off",
+    "import/extensions": "off",
+    "import/prefer-default-export": "off",
+    "max-len": [
+      "error",
+      {
+        "code": 100,
+        "tabWidth": 2
+      }
+    ],
+    "no-param-reassign": "off",
+    "no-underscore-dangle": "off",
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".tsx"]
+      }
+    ],
+    "import/no-unresolved": "off",
+    "consistent-return": "off",
+    "jsx-a11y/anchor-is-valid": "off",
+    "sx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "react/jsx-props-no-spreading": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "no-prototype-builtins": "off",
+    "no-nested-ternary": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
+  }
+}
+
+
+Git Hooks: MEjora tu flujo de tarbajo con Husky y Lint-staged
+
+npm install --save-dev husky lint-staged
+
+npm install eslint-plugin-prettier@latest --save-dev
+
+npm install --save-dev eslint-config-prettier
+
+https://carlosazaustre.es/husky-lintstaged
+
+Creamos un fichero .lintstagedrc en la raíz de nuestro proyecto, con el siguiente contenido:
+
+{
+  "*.{js,jsx,ts,tsx}": ["eslint --fix", "git add"]
+}
+
+
+Ahora en nuestro package.json añadimos un script que podemos llamar prepare. Puedes añadirlo en
+ la sección scripts o ejecutar el siguiente comando:
+ 
+	npm set-script prepare "husky install"
+	
+	Edit package.json > prepare script and run it once:
+
+  npm run-script prepare "husky install"
+  npm run prepare
+  
+  npx husky add .husky/pre-commit "npx lint-staged"
+  git add .husky/pre-commit
+  
+  /** Functional programming 
+  In the next section, you will learn about how Functional Programming (FP) works and topics such 
+  as first-class objects, purity, immutability, currying, and composition.
+  
+  ** Functional programming
+  
+  -- First-class Functions
+  This allows us to introduce the concept of Higher-Order Functions (HoFs). HoFs are functions that take 
+  a function as a parameter, and optionally some other parameters, and return a function. The returned
+  function is usually enhanced with some special behaviours.
+  
+  const add = (x, y) => x + y
+const log = fn => (...args) => { 
+  return fn(...args)
+}
+const logAdd = log(add)
+
+This concept is pretty important to understand because in the React world, a common pattern is to use HOCs
+ to treat our components as functions, and to enhance them with common behaviours. We will see HOCs and 
+ other patterns in Chapter 4, Exploring Popular Composition Patterns.
+ 
+ ** Purity
+ 
+ to write pure functions.A function s pure when there are no side effects,
+ 
+ funtion pureÑ 
+ const add = (x,y)=> x+you
+ 
+ function is not pure:
+ 
+ let x=0
+ const add = y =>(x= x+y)
+ 
+ ** Immutability 
+ In Fp , instead of changng the value of a variable , create a new variable with a new value and returns it.
+ Let's look at an example:
+
+const add3 = arr => arr.push(3)
+const myArr = [1, 2]
+add3(myArr); // [1, 2, 3]
+add3(myArr); // [1, 2, 3, 3]
+
+We can change the preceding function to make it immutable using concat, which returns a new array without modifying the given one:
+
+const add3 = arr => arr.concat(3)
+const myArr = [1, 2]
+const result1 = add3(myArr) // [1, 2, 3]
+const result2 = add3(myArr) // [1, 2, 3]
+
+After we have run the function twice, myArr still has its original value.
+
+** Currying 
+Is the process of coverting a function that takes multiple arguments into a function one argment at a time and
+returning another  function.
+
+Say we have the following code:
+
+const add = (x, y) => x + y
+We can instead define the function as follows:
+
+const add = x => y => x + y
+We use it in the following way:
+
+const add1 = add(1)
+add1(2); // 3
+add1(3); // 4
+
+** Composition
+
+FP that can be applied to React is composition. Functions (and components) can be combined to produce new
+ functions with more advanced features and properties.
+ 
+ Consider the following functions:
+
+const add = (x, y) => x + y
+const square = x => x * x
+These functions can be composed together to create a new function that adds two numbers and then doubles 
+the result:
+
+const addAndSquare = (x, y) => square(add(x, y))
+
+**** 4 Exploring Popular Composition Patterns
+
+React is powerful because it lets you build complex applications comprising small, testable, 
+and maintainable components
+
+We will cover the following topics:
+
+
+How components communicate with each other using props and children
+The container and presentational patterns and how they can make our code more maintainable
+What higher-order components (HOCs) are and how, thanks to them, we can structure our applications
+ in a better way
+What the function of the child component pattern is and what its benefits are
+
+** Communicating components 
+
+Reusable components can be shared across multiple domains of your apllication to avoid duplication.
+
+Small components with a clean interface can be composed together to create complex applications that are 
+powerful and maintainable at the same time.
+
+const Profile = ({ user }) => ( 
+    <>
+	  <Picture profileImageUrl={user.profileImageUrl} /> 
+      <UserName name={user.name} screenName={user.screenName} /> 
+    </> 
+  )
+  
+  Props are the way a parent component can pass its data down the tree to every component that needs it (
+  or part of it).
+  
+  ** using el children prop
+  
+  In the React documentation, it is described as opaque because it is a property that does not tell you 
+  anything about the value it contains. Subcomponents defined inside the render of a parent component 
+  usually receive props that are passed as attributes of the component itself in JSX, or as a second
+  parameter of the _jsx function.
+  
+   const Button = ({ text }) => <button className="btn">{text}</button> 
+   
+The component can be used in the following way:
+
+  <Button text="Click me!" />
+  
+And this will render the following code:
+
+  <button class="btn">Click me!</button>
+  
+ **** Exploring the container and presentational patterns
+ 
+ tep. Now we will see how to apply a similar pattern to our components to make them clearer
+ and more maintainable.
+ 
+ React components typically contain a mix of logic and presentation. By logic, we refer to
+ anything that is unrelated to the UI, such as API calls, data manipulation, and event handlers.
+ 
+ The presentation is the part inside render where we create the elements to be displayed on the UI.
+ 
+  React, there are simple and powerful patterns, known as container and presentational, which we can 
+  apply when creating components that help us to separate those two concerns.
+  
+  we have a component that uses geolocation APIs to get the position of the user and displays the latitude 
+  and longitude on the page in the browser.
+  
+  Chapter 2, Cleaning Up Your Code, you might want to display a spinner until the data gets returned.
+  
+  We will use the container and presentational patterns to isolate the presentational part. In this pattern,
+
+  every component is split into two smaller ones, each one with its clear responsibilities. The container 
+  knows everything about the logic of the component and is where the APIs are called. It also deals with 
+  data manipulation and event handling.
+  
+  There are no rules that say that the presentational component must not have a state (for example, it 
+  could keep a UI state inside it).
+  At the same time, other developers in our team can improve the container that uses geolocation by adding
+  some error-handling logic, without affecting its presentation.
+  Being able to work in parallel on the same component is a big win for teams, especially for those companies
+  where building interfaces is an iterative process.
+  
+   applying this pattern without a real reason can give us the opposite problem and make the code base 
+   less useful as it involves the creation of more files and components.
+   
+   the following points should help you make that decision:
+   
+ **  They are more concerned with behavior.
+**	They render their presentational components.
+**	They make API calls and manipulate data.
+**	They define event handlers.
+
+--- The following are the characteristics of presentational components:
+
+**	They are more concerned with the visual representation.
+**	They render the HTML markup (or other components).
+**	They receive data from the parents in the form of props.
+**	They are often written as stateless functional components.
+
+ Let's see what HOCs are in the next section
+ 
+ --- Understanding HOCs
+ 
+ In the Functional programming section of Chapter 2, Cleaning Up Your Code, we mentioned the concept of 
+ higher-order functions (HOFs), which are functions that, given a function, enhance it with some extra 
+ behaviors, returning a new one.
+ 
+ const HoC = Component => EnhancedComponent
+ 
+ HOCs are functions that take a component as input and return an enhanced one as the output.
+ 
+ const HoC = Component => EnhancedComponent
+ 
+  const withClassName = Component => props => ( 
+    <Component {...props} className="my-class" /> 
+  )  
+In the React community, it is very common to have the prefix with for HOCs
+We declare a withClassName function that takes a Component and returns another function. The returned 
+function is a functional component that receives some props and renders the original component. The
+ collected props are spread, and a className property with the "my-class" value is passed to the functional 
+ component.
+ 
+ First of all, we create a stateless functional component that receives the class name and applies it to
+ a div tag:
+
+  const MyComponent = ({ className }) => <div className={className} /> 
+Instead of using the component directly, we pass it to an HOC, as follows:
+
+  const MyComponentWithClassName = withClassName(MyComponent)
+Wrapping our components into the withClassName function, we ensure that it receives the className property.
+
+--- Understanding FunctionalAsChild
+There is a Pattern that is gaining consensus within the React Community, It is widely used in the 
+popular react-motion lbrary, chapter 7, Writing code for the browser.
+
+the main concept is that, instead of passing a child in the from of a component, we define a function that 
+can receive parameters from the parent.
+
+Let's see what it look like:
+
+const FunctionAsChild = ({ children}) => children()
+
+As you can see, FunctionalAsChild is a component that a children property defined as a function and, 
+instead of begin used as a JSX express\, it gets called.
+
+The preceding component can be used in the following way:
+
+<FunctionAsChild>
+    {() => <div>Hello, World!</div>} 
+  </FunctionAsChild>
+
+
+Chapter 5 Writing code for the Browser.
+We can ask our users to enter some information usign forms. WE can implement uncontrolled components and let 
+fields keep their internal states, or we can use controlled ones, where er have full control over the state
+ ot the fields.
+
+Events in React work and whow library implements some advantages techniques to give us a consistent 
+interface, event system very perform.
+
+After refs, we will look at how we can implement animations easily with the React add-ons and third-party
+ libraries such as react-motion.
+ 
+ In this chapter, we will go through the following topics:
+
+Using different techniques to create forms with React
+Listening to DOM events and implementing custom handlers
+A way of performing imperative operations on DOM nodes using refs
+Creating simple animations that work across different browsers
+The React way of generating SVG
+
+** Undersranding and implementing forms
+
+WE are going to learn how to use uncontrolled and controlled components.
+
+** Uncontrolled Components
+Uncontrolled components are like regular HTML form inputs.
+
+For example, we may want to send the data to an API endpoint.

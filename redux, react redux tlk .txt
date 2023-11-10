@@ -1,0 +1,85 @@
+React 
+
+What is state?
+Any data in your application that can change based on conditions .
+
+Its data store that is use to manage the component data.
+
+What is state management?
+
+* iT´S the ability to control the information  that is passed between React components.
+* State management is the process of determining how to manage state information in a web application
+* State management can be used to track.
+- user data
+- session data
+- Application data 
+- Component data  
+
+
+Types of data Sources?
+
+We say 
+* server data is a data that coems from an external Api or server, as a front developer.
+* Global State, it simply means that data that we manage acrss multiple components.
+* local state, and this refer to the data that we manage in a particular component.
+  local state is form management.
+* next source data is called you are state,and this data exists on new Urls, including the path 
+name and query parameters. Let´s say that if yopu want to find a particular record or document
+we nnormally pass the ID in the param.
+* Routing and you are state and routing. it´s about local storage, it means that data from Browser API,
+we normaly use local storage for authentication, meaning that we save the logging user into local storage,
+or we can use local storage for cart management.
+
+** Ways of managing state in react
+
+- useState: is a hook for managing state in a particular component.
+- useContext(): context API, and we also use context API for state management.
+- Redux: 
+- RTK: which mena redux toolkit
+- RTK Query.
+
+React TSate MAnagement Libraries
+
+- ZOO stand
+- Recoi 
+- Jotaiu
+- Redux. we are going to use 
+
+ What is Redux?
+ 
+ * Redux is an open-source JS library for managing and centralizing application state 
+ *  A predictable State Container for JS aApps
+ 
+ It means that it is a way to keep track of the different things that are happening in your application.
+ and this helps to make sure that everithing happens in the right order and that your application doesn´t
+ 
+ When to use redux?
+ 
+ * Youi should use Redux when you have a complex state object that is difficult to manage with the local 
+ state alone 
+ * The app state is updated frequently
+ * the logic to uopdate that state may be complex
+ 
+ // benefits of using redux 
+ 
+ * Predictable , it simply means that it helps the application to behave consistently in different enviroments,
+ whether on the client side or server side, or because redux uses a strict unidirectional data flow.
+ * Centralized state management: this means sthat it help to separate the application state and logic in one 
+ plac eor redux lets you manage tou state in a central place.
+ * Debuggable . Of using the built in use context API hook from  react.
+ 
+ ** Redux important terms 
+ If you don´t undertand the terms and don´t understand how it works.
+ 
+ -- Actions, Actions are the driving force of every dynamic appliccation, as they the medium by which all changes 
+ are comunicated within a Redux application.
+ 
+ -- Reduicers, Reducers are event listeners which handle events absed on the action t ype
+ 
+ -- AStore, it stores the application data
+ 
+ ** How redux works Important.!!
+ 
+ Action is teh driving force.
+ Store wehre to data
+ Reducer 

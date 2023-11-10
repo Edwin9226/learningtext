@@ -1,0 +1,29 @@
+Hibernate Overview 
+
+Configuration object is used to create a Session Factory object.
+T he Session factory is a thread safe object and used by all yhe threads of an application.
+We would need one SessionFactory object per database using a seaprate configuration
+
+Session Object
+
+ 
+Hibernate cahing 
+
+cachinng is a mechanism to enhancethe performance of a system. It is a buffer memory that lies 
+between the application and the database. Cache memory stores recently used data items in order
+to reduce the number of database hits as much as possible.
+
+** // First Level  Cache
+the First-level cache is the Session cache and is a mandatory cache through which all request  must pass.
+The Session object keeps an object under its own power before committing it to the database.
+
+** Second-level cache 
+Secon level cache is an optional cache and first-levelcache will always be consulted before any attempt is
+made to locale an object in the second-level cache. The second level cache can be configured on per class 
+and per-collection basis and mainly responsible for caching objects across sessions.  
+
+** // Query level cache 
+Hibernate also implement a cache fro query resulsets that integrates closely whir the second level cache.
+
+This is an optional feature and requires two additional physical cache regions that hold the cached 
+query results and the timestamps when a table was  last updated. This is onl 

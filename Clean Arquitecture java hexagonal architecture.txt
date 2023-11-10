@@ -1,0 +1,44 @@
+Get your hamnds dirty on Clean Arquitecture
+
+one of te following thing will happen:
+* the Poject manager id not strong enough to win th ebattle against the external partner.
+* the external partner finds a loophole in the API specs, proving them right
+* the exrternal partner need sanother  moth to fix the API
+
+CHATER 1 
+
+** MAINTAINABILITY
+Software Architecture. architecture is the structure of a system or process.there are quality requirements 
+(also called non-functional requirements).One such quality requirement is maintainability.
+
+What does maintainability even mean?
+QUality requirements:
+* Scalability
+* Flexibility
+* MAINTAINABILITY
+* Security
+* Reliability
+* Modularity
+* Performance
+* Interoperability
+* Testability
+* Cost-effectiveness
+
+ lump maintainability in with the rest of the quality requirements because maintainability is special. 
+ If software is maintainable, that means it’s easy to change. If it’s easy to change, it’s flexible and 
+ probably modular. It’s probably cost-effective, too, because easy changes mean cheap changes. If it’s 
+ maintainable, we can probably evolve it to be scalable, secure, reliable, and performant, should the need 
+ arise. 
+ 
+ ** MAintainability enables functionality
+ 
+ Sotfware that doesn't provide value to its users means that users don't pay for it. and  without paying users
+ we dont have a workin bussienes  model, wich is te main measure of success in the bussiness world.
+ Our software needs to provide value. but it shouldn'y provide value at the cost the maintainability.
+ we don'thave of fight your way through one line of code at time.
+ 
+ Those system asually fall into one (or both) of two categories:
+ * They are at the end of their life where changes to the system are few and far between
+ * they are backend by a fynancially well-off company that is willing to throw money at the problem.
+ 
+ Clean – or Ports and Adapters/Hexagonal – architecture is a good fit for your context.

@@ -1,0 +1,94 @@
+MAstering JS Functional Programming
+
+Theory versus practice and see how we plan to use FP.
+
+Theory vs PracticeSorta Functional Programming (SFP), classical imperatives OOP.
+
+OOP has been a way to solve the inherent complexity of writing large programs and systems, and 
+developing clean, extensible, scalable application architectures.
+
+** A different way of thinking
+
+FP is based on producing the desired result by evaluating 
+expressions built out of functions that are composed together. In FP, it’s common to pass functions 
+around (such as passing parameters to other functions or returning functions as the result of 
+a calculation), not use loops (opting for recursion instead), and skip side effects (such as modifying 
+objects or global variables).
+
+In other words, FP focuses on what should be done, rather than on how it should be done. Instead of 
+worrying about loops or arrays, you work at a higher level, considering what needs to be done.
+
+Think of FP only as a means to an end, as with all software tools. Functional code isn’t good 
+just for being functional, and writing bad code is just as possible with FP as with any other technique!
+
+** FP and other programming paradigms
+
+Programming may be procedural (if instructions are 
+grouped into procedures) or object-oriented (if instructions are grouped with a related state).
+
+Declarative languages may be logic-based (based on logic rules and 
+constraints), reactive (based on data and event streams), or functional (based on the application and 
+combination of functions).
+
+
+qualities:
+
+ • Modular: The functionality of your program should be divided into independent modules, 
+each of which contains a part of the solution. Changes in a module or function shouldn’t affect 
+the rest of the code.
+• Understandable: A reader of your program should be able to discern its components, functions, 
+and relationships without undue effort. This is closely linked with the maintainability of the 
+code; your code will have to be maintained in the future, whether to be changed or to have 
+new functionality added.
+• Testable: Unit tests try out small parts of your program, verifying their behavior independently 
+of the rest of the code. Your programming style should favor writing code that simplifies the 
+job of writing unit tests. Unit tests are also like documentation in that they can help readers 
+understand what the code is supposed to do.
+• Extensible: It’s a fact that your program will someday require maintenance, possibly to add new 
+functionality. Those changes should impact the structure and data flow of the original code 
+only minimally (if at all). Small changes shouldn’t imply large, serious refactoring of your code.
+• Reusable: Code reuse has the goal of saving resources, time, and money, and reducing redundancy 
+by taking advantage of previously written code. Some characteristics help with this goal, such as 
+modularity (which we already mentioned), high cohesion (all the pieces in a module belong 
+together), low coupling (modules are independent of each other), separation of concerns
+(the parts of a program should overlap in functionality as little as possible), and information 
+hiding (internal changes in a module shouldn’t affect the rest of the system).
+
+** What we get 
+So, does FP give you the five characteristics we just listed in the previous section?
+• In FP, the goal is to write separate independent functions that are joined together to produce 
+the final results.
+• Programs that are written in a functional style usually tend to be cleaner, shorter, and easier 
+to understand.
+• Functions can be tested on their own, and FP code has advantages in achieving this.
+• You can reuse functions in other programs because they stand on their own, not depending on 
+the rest of the system. Most functional programs share common functions, several of which 
+we’ll be considering in this book.
+• Functional code is free from side effects, which means you can understand the objective of a 
+function by studying it without having to consider the rest of the program.
+
+** JS as tools. It can be seen as 
+functional because of several features, such as first-class functions, anonymous functions, recursion, 
+and closures 
+
+
+he way to go
+This is better solved, in a more modern way, by using promises or async/await, but for 
+the sake of our example, the old way is enough. We’ll be getting back to promises, though, 
+in Chapter 12, Building Better Containers, when we discuss monads; in particular, see the 
+Unexpected monads – promises section
+ 
+** Note
+Functions, anonymous
+Arrow functions are usually called anonymous functions because of their lack of a name. If 
+you need to refer to an arrow function, you’ll have to assign it to a variable or object attribute, 
+as we did here; otherwise, you won’t be able to use it. We’ll learn more about this in the Arrow 
+functions – the modern way section of Chapter 3, Starting Out with Functions.
+
+
+Functions – the lambda way
+In lambda calculus, a function such as x => 2*x would be represented as λx.2*x. Although there 
+are syntactical differences, the definitions are analogous. Functions with more parameters are 
+a bit more complicated; (x,y)=>x+y would be expressed as λx.λy.x+y. We’ll learn more about 
+this in the Of lambdas and functions section of Chapter 3, Starting Out with Functions, and in 
+the Currying section of Chapter 7, Transforming Functions.

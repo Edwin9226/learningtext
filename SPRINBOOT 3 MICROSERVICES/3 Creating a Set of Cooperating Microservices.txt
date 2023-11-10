@@ -1,0 +1,67 @@
+** Creating a Set of Cooperating Microservices
+
+The following topics will be covered in this chapter:
+
+* Introducing the microservice landscape
+* Generating skeleton microservices
+* Adding RESTful APIs
+* Adding a composite microservice
+* Adding error handling
+* Testing the APIs manually
+* Adding automated tests of microservices in isolation
+* Adding semi-automated tests to a microservice landscape
+
+** introduccionthe microservice landscape
+
+microservice-based system landscape that we will use, 
+It consists of three core micoservices, the product, review, and recommendation service,
+all of which deal with one type of resource, and a composite microservice called the Product
+ Composite service, which aggregates information from the three core services.
+ 
+ ** Information handled by the microservices 
+  In this section, we will go through the information that’s handled by each microservice, including 
+  infrastructure-related information.
+  
+-- The product service
+The product service manages product information and describes each product with the following attributes:
+Product ID
+Name
+Weight
+
+-- The review service
+The review service manages product reviews and stores the following information about each review:
+
+Product ID
+Review ID
+Author
+Subject
+Content
+
+-- The recommendation service
+The recommendation service manages product recommendations and stores the following information about each recommendation:
+
+Product ID
+Recommendation ID
+Author
+Rate
+Content
+
+The product composite service
+The product composite service aggregates information from the three core services and presents information about a product as follows:
+
+-- Product information, as described in the product service
+-- A list of product reviews for the specified product, as described in the review service
+-- A list of product recommendations for the specified product, as described in the recommendation service
+
+Infrastructure-related information
+Once we start to run our microservices as containers that are managed by the infrastructure (first Docker and later on Kubernetes),
+
+Temporarily replacing service discovery
+Since, at this stage, we don’t have any service discovery mechanism in place, we will run all microservices on localhost and use hardcoded port numbers for each microservice. We will use the following ports:
+
+The product composite service: 7000
+The product service: 7001
+The review service: 7002
+The recommendation service: 7003
+
+We will get rid of the hardcoded ports later when we start using Docker and Kubernetes!

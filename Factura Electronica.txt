@@ -1,0 +1,17 @@
+Desarrollado en php, bd en mysql, firmador en Apache Tomcat
+✅ Emision de Facturas, nota debito, nota crédito, guias, retenciones y liquidaciones de compra al
+ SRI Ecuador.
+✅ Actualizado Regimen RIMPE y Regimen Popular RIMPE
+✅ Control de varios puntos de emision y establecimeintos
+✅ Multiempresa
+✅ Generación De Ticket
+✅ Modulo de productos, clientes, usuarios, empresas
+✅ Modulo de planes para restringir la emisión de comprobantes a una empresa en especifico por tiempo o 
+cant de comprobantes
+✅ Posibilidad de atender varias cuentas al mismo tiempo.
+✅ Reportes/informes
+
+ prisma y mikro
+ 
+ Ejercicios de keigel placenteros ayudan a tensar
+ 

@@ -1,0 +1,141 @@
+instalaciion wsl 2
+https://learn.microsoft.com/en-us/windows/wsl/install-manual
+
+linux server install next:
+On the Linux server, we will install the following tools:
+
+Git: https://git-scm.com/downloads
+Java: https://adoptium.net/installation
+curl: https://curl.haxx.se/download.xhtml
+jq: https://stedolan.github.io/jq/download/
+Spring Boot CLI: https://docs.spring.io/spring-boot/docs/3.0.4/reference/html/getting-started.xhtml#getting-started.installing.cli
+Siege: https://github.com/JoeDog/siege#where-is-it
+Helm: https://helm.sh/docs/intro/install/#from-apt-debianubuntu
+kubectl: https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/
+minikube: https://minikube.sigs.k8s.io/docs/start/
+istioctl: https://istio.io/latest/docs/setup/getting-started/#download
+The following versions have been used when writing this book:
+
+Windows Terminal: v1.16.10261.0
+Visual Studio Code: v1.75.1
+Docker Desktop for Windows: v4.14.0
+Git: v2.34.1
+Java: v17.0.6
+curl: v7.81.0
+jq: v1.6
+Spring Boot CLI: v3.0.4
+Siege: v4.0.7
+Helm: v3.11.2
+kubectl: v1.26.1
+minikube: v 1.29.1
+istioctl: v1.17.0
+
+lsb_release -d
+
+**/ Installing Docker Desktop for Windows
+
+To install and configure Docker Desktop for Windows, perform the following steps:
+
+Download and install Docker Desktop for Windows from https://hub.docker.com/editions/community/docker-ce-desktop-windows/.
+If you are asked to enable WSL 2 during installation, answer YES.
+After the installation is complete, launch Docker Desktop from the Start menu.
+From the Docker menu, select Settings, and in the Settings window, select the General tab:
+Ensure that the Use the WSL 2 based engine check box is selected.
+To avoid starting up Docker Desktop manually each time the PC is restarted, I recommend also selecting the Start Docker Desktop when you log in check box.
+The General settings should look like the following:
+
+install tools using apt install
+
+sudo apt update
+sudo apt install -y jq
+sudo apt install -y zip
+sudo apt install -y unzip
+sudo apt install -y siege
+
+*** install helm 
+
+curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
+sudo apt-get install apt-transport-https --yes
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+sudo apt-get update
+sudo apt-get install helm
+
+
+** Instal thee java and Spring boot CLI using SDKman
+
+
+curl -s "https://get.sdkman.io" | bash source "$HOME/.sdkman/bin/sdkman-init.sh"
+sdk install java 17.0.6-tem
+
+sdk install springboot 3.0.4
+
+**  Helm 
+para administrar paquetes en su cluster de Kubernetes.
+
+-- Chart 
+es un paquete de Helm. Contiene todas las definiciones de recursos necesarias para ejecutar una aplicación.
+herramienta o servicio dentro de un clúster de kubernetes.
+
+** verificando instalaciones 
+
+git version && \
+docker version -f json | jq -r .Client.Version && \
+java -version 2>&1 | grep "openjdk version" && \
+curl --version | grep "curl" | sed 's/(.*//' && \
+jq --version && \
+spring --version && \
+siege --version 2>&1 | grep SIEGE && \
+helm version --short && \
+kubectl version --client -o json | \
+  jq -r .clientVersion.gitVersion && \
+minikube version | grep "minikube" && \
+istioctl version --remote=false
+
+
+export BOOK_HOME=~/Microservices-with-Spring-Boot-and-Spring-Cloud-Third-Edition
+git clone https://github.com/PacktPublishing/Microservices-with-Spring-Boot-and-Spring-Cloud-Third-Edition.git $BOOK_HOME
+
+wsl 2 
+cd $BOOK_HOME
+code .
+
+ The following versions of Spring are used:
+
+Spring Framework: 6.0.6
+Spring Boot: 3.0.4
+Spring Cloud: 2022.0.1
+
+├── api
+├── microservices
+│   ├── product-composite-service
+│   ├── product-service
+│   ├── recommendation-service
+│   └── review-service
+├── spring-cloud
+│   ├── authorization-server
+│   ├── config-server
+│   ├── eureka-server
+│   └── gateway
+└── util
+
+├── build.gradle
+├── settings.gradle
+└── src
+    ├── main
+    │   ├── java
+    │   └── resources
+    └── test
+        ├── java
+        └── resources
+
+https://docs.gradle.org/current/userguide/organizing_gradle_projects.xhtml.
+
+** For development, we will use git, docker, java, and spring
+**  To create a Kubernetes environment to deploy our microservice in runtime, we will use minikube, Helm, kubectl, and istioctl.
+** run tests to verify that the microservices work as expected in runtime, we will use curl, jq, and siege.
+
+autonomous software component; taht is, it had its own persistent data only communicated with other components
+using well-defined APIs.
+
+
+a teo-node  deployment may look as fofollow

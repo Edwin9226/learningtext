@@ -1,0 +1,17 @@
+JS aimportnt in web development:
+
+1 DOM MAnipulation
+2 Even HAndling. JS enables youto respond to user interactions. By attaching event listeners to specifis element,
+ you can triggers actions and dynamically update the web page based on user input.
+ 
+3 Form Validation 
+4 Asyncronous Operations 
+
+Variables and data types 
+
+Declaring variables and assigning values
+
+1. var : it si a function scope or global scope It can  be redeclaraded and reassigment and redeclaration.
+2. let : provide block scope, It can be reassigned within its scope  but cannot be redeclared in the same scope.
+3. const
+

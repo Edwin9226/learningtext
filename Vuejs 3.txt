@@ -1,0 +1,113 @@
+nom install vue-cli
+
+a chat interface, a shopping cart and price 
+calculator, a to-do app, and a profile card generator for storing contact details.
+
+Here, you’ll discover how to handle data in Vue components, define communication interfaces between 
+components, and handle static and dynamic routing to control the application flow. You’ll also work 
+with Vite and Vue Devtools and learn how to handle transition and animation effects to create an 
+engaging user experience
+
+This chapter will cover the following topics:
+• Understanding Vue as a framework
+• Setting up a Vite-powered Vue application
+• Exploring data properties as a local state
+• Writing components with <script setup>
+• Understanding Vue directives
+• Enabling two-way binding using v-model
+• Understanding data iteration with v-for
+• Exploring methods
+• Understanding component lifecycle hooks
+• Styling components
+• Understanding CSS modules
+
+
+** Vue as a framework
+
+However, companies such as Apple and Google have proven that thinking through the design of the 
+frontend is key to a solid product or platform that will excite and engage users, leading to a higher 
+return on investment and a more successful business.
+
+** anglar vs vue 
+anuglar MVVM (MOdel view - View Model) support for tS. AHEad of Time rendering, a router, and a CLI tool.
+
+Vue 3.0 onward, it provides excellent support for TS and typing without the drawbacks of Angular -enforced
+coding-styles.
+
+** React vs Vue 
+React introduce the JSX pattern to write Html syntax directly with JS. NEw developer are required to 
+learn about both JS and component-based archuitecture.
+
+Both share the same component-driven development aproach, allowing developers to build applications 
+in a modular way. 
+Each component contains its functionalities and lifecycle.
+
+Vue us ethe Single-FileComponent (Single File Component).
+
+** Advantages of using Vue for your project
+
+One key benefit of VUE is its aproachability for both new and veteran developerÑ
+- Out the box,
+- The SFC format pattern offers modular and flexible blueprint that provides an enjoyable experience
+ for developers.
+
+As powerful as Redux and NgRx, Vuex (and lately Pinia).
+
+Well defined tools such as Vue Router, Pinia, Vuex 
+
+** Understanding the Vue Instance 
+
+const vm = Vue.createApp({
+ // options
+})
+
+Note
+vm is a term commonly used to refer to a View Model, which is an abstraction of the view that 
+describes the state of the data in the model. Binding a Vue instance to vm helps you to keep 
+track of your Vue instance in a block of code
+
+<head>
+ <title>Vue.js CDN</title>
+ <script src="https://unpkg.com/vue@3"></script>
+ <script>
+ document.addEventListener('DOMContentLoaded', function
+ () {
+ Vue.createApp({
+ data(){
+ return {
+ text: "Start using Vue.js today!"
+ }
+ }
+ }).mount('#vue-app')
+ })
+ </script>
+</head>
+<body>
+ <div id="vue-app">{{text}}</div>
+</body>
+
+
+*** creacion d euna aplicacion de VUe 
+https://vuejs.org/guide/quick-start.html#creating-a-vue-application
+
+✔ Project name: … <your-project-name>
+✔ Add TypeScript? … No / Yes
+✔ Add JSX Support? … No / Yes
+✔ Add Vue Router for Single Page Application development? … No / Yes
+✔ Add Pinia for state management? … No / Yes
+✔ Add Vitest for Unit testing? … No / Yes
+✔ Add Cypress for both Unit and End-to-End testing? … No / Yes
+✔ Add ESLint for code quality? … No / Yes
+✔ Add Prettier for code formatting? … No / Yes
+
+
+** Building your firt component
+
+Note
+Your app will hot-reload when you save new changes, so you can see them instantly
+
+Note
+From this point onward, we will combine both approaches and use <script setup>
+whenever possible.
+
+****  exploring basic directives (v-text, v-once, v-html, v-bind, v-if, v-show)

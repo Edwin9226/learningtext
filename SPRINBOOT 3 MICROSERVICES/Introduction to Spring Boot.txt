@@ -1,0 +1,273 @@
+Introduction to Spring Boot
+
+We will develop microservices that contain business logic based on plain Spring Beans and expose REST APIs
+ using Spring WebFlux. The APIs will be documented based on the OpenAPI Specification using springdoc-openapi.
+ To make the data processed by the microservices persistent,  we will use Spring Data to store data in 
+ both SQL and NoSQL databases.
+ 
+ it has become much easier to develop reactive microservices, including non-blocking synchronous REST APIs.
+ To develop message-based asynchronous services, we will use Spring Cloud Stream. 
+Spring Boot 
+Spring WebFlux
+springdoc-openapi
+Spring Data
+Spring Cloud Stream
+Docker
+
+
+Convention over configuration and fat JAR files
+
+This design pattern is known as convention over configuration and minimizes the need for initial configuration.
+
+NOte
+Configuration, when required, is, in my opinion, written best using Java and annotations. The good old 
+XML-based configuration files can still be used, although they are significantly smaller than before 
+Spring Boot was introduced.
+
+*** idea 
+I prefer using constructor injection (over field and setter injection) to keep the state in my components 
+immutable. An immutable state is important if you want to be able to run the component in a multithreaded 
+runtime environment.
+
+@Configuration
+public class SubscriberApplication {
+  @Bean
+  public Filter logFilter() {
+    CommonsRequestLoggingFilter filter = new 
+        CommonsRequestLoggingFilter();
+    filter.setIncludeQueryString(true);
+    filter.setIncludePayload(true);
+    filter.setMaxPayloadLength(5120);
+    return filter;
+  }
+  
+ ** What’s new in Spring Boot 3.0
+ - Observability
+ with improved support for observability, adding built-in support for distributed tracing to the already
+ existing support for metrics and logging in previous Spring Boot releases
+ 
+ Observability API in Spring Framework v6.0 and a new module named Micrometer Tracing.
+ Micrometer Tracing is based on Spring Cloud Sleuth, which is now deprecated. 
+ 
+ - Native Compilation
+ - Virtual Threads
+ 
+ Spring Boot 3.0 comes with support for lightweight threads called virtual threads from the OpenJDK Project 
+ Loom. Virtual threads are expected to simplify the programming model for developing reactive non-blocking 
+ microservices, for example, compared to the programming model used in Project Reactor and various Spring
+ components.
+ 
+ ** Migrating a Spring Boot 2 application
+ 
+ Migrating a Spring Boot 2 application
+ 
+ where calls are being made in your application, you can enable the lint:deprecation flag in the Java compiler 
+ using (assuming the use of Gradle):
+tasks.withType(JavaCompile) {
+    options.compilerArgs += ['-Xlint:deprecation']
+}
+
+For breaking changes and other important migration information, read through:
+https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.0-Migration-Guide
+
+https://docs.spring.io/spring-security/reference/migration/index.xhtml
+
+** Sprin g WebFlux
+Spring Boot 3.0 is based on the Spring Framework 6.0, which has built-in support for developing reactive 
+applications. The Spring Framework uses Project Reactor as the base implementation of its reactive support
+ and also comes with a new web framework, Spring WebFlux, which supports the development of reactive, that
+ is, non-blocking, HTTP clients and services.
+ 
+ Spring WebFlux supports two different programming models:
+
+- An annotation-based imperative style, similar to the already existing web framework, Spring Web MVC,
+ but with support for reactive services
+- A new function-oriented model based on routers and handlers
+
+Spring WebFlux and then start to refactor the services so that they become fully reactive.
+Spring WebFlux also provides a fully reactive HTTP client, WebClient, as a complement to the existing 
+RestTemplate client.
+
+** note 
+The Servlet specification is a specification in the Java EE platform that standardizes how to develop Java 
+applications that communicate using web protocols such as HTTP.
+
+implementation('org.springframework.boot:spring-boot-starter-webflux')
+{
+ exclude group: 'org.springframework.boot', module: 'spring-boot-
+ starter-reactor-netty'
+}
+implementation('org.springframework.boot:spring-boot-starter-tomcat')
+
+ ** springdoc-openapi
+
+springdoc-openapi is an open source project, separate from the Spring Framework, that can create OpenAPI-based 
+API documentation at runtime. It does so by examining the application, for example, inspecting WebFlux
+ and Swagger-based annotations.
+ 
+ ** Spring Data
+ 
+ The Spring Data project is divided into several subprojects, and in this book, we will use Spring Data subprojects
+ for MongoDB and JPA that have been mapped to a MySQL database.
+ 
+ 
+ *** idea 
+ JPA stands for Jakarta Persistence API and is a Java specification about how to handle relational data. 
+ Please go to https://jakarta.ee/specifications/persistence/ for the latest specifications. Jakarta EE 9
+ is based on Jakarta Persistence 3.0.
+ 
+ ** Entity
+ An entity describes the data that will be stored by Spring Data. Entity classes are, in general, annotated with a
+ mix of generic Spring Data annotations and annotations that are specific to each database technology.
+ import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
+import jakarta.persistence.Table;
+@Entity
+
+@IdClass(ReviewEntityPK.class)
+@Table(name = "review")
+public class ReviewEntity {
+ @Id private int productId;
+ @Id private int reviewId;
+ private String author;
+ private String subject;
+ private String content;
+ 
+ MongoDB
+ 
+ import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Version;
+import org.springframework.data.mongodb.core.mapping.Document;
+@Document
+public class RecommendationEntity {
+    @Id
+    private String id;
+    @Version
+    private int version;
+    private int productId;
+    private int recommendationId;
+    private String author;
+    private int rate;
+    private String content;
+	
+	The @Id and @Version annotations are generic annotations,
+	while the @Document annotation is specific to the Spring Data MongoDB subproject.
+	
+** Repositories
+
+@Table(name = "review")
+public class ReviewEntity {
+ @Id private int productId;
+ @Id private int reviewId;
+ private String author;
+ private String subject;
+ private String content;
+If an entity is to be stored in a MongoDB database, annotations from the Spring Data MongoDB subproject can be used together with generic Spring Data annotations. For example, consider the following code:
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Version;
+import org.springframework.data.mongodb.core.mapping.Document;
+@Document
+public class RecommendationEntity {
+    @Id
+    private String id;
+    @Version
+    private int version;
+    private int productId;
+    private int recommendationId;
+    private String author;
+    private int rate;
+    private String content;
+The @Id and @Version annotations are generic annotations, while the @Document annotation is specific to the Spring Data MongoDB subproject.
+
+This can be revealed by studying the import statements; the import statements that contain mongodb come from the Spring Data MongoDB subproject.
+
+** Repositories
+
+Repositories are used to store and access data from different types of databases. In its most basic form, 
+a repository can be declared as a Java interface, and Spring Data will generate its implementation on the 
+fly using opinionated conventions. These conventions can be overridden and/or complemented by additional 
+configuration and, if required, some Java code.
+	
+Developing Reactive Microservices, reactive streams that are capable of returning 
+either 0...1 or 0...m entities as they become available on the stream.
+
+The reactive-based interface can only be used by Spring Data subprojects that support reactive database 
+}drivers; that is, they are based on non-blocking I/O. The Spring Data MongoDB subproject supports reactive
+ repositories, while Spring Data JPA does not.
+ 
+ ** Spring Cloud Stream
+ 
+ This concludes the section on Spring Data. Now let’s see how we can use Spring Cloud Stream to develop
+ message-based asynchronous services.
+ 
+ . Spring Cloud Stream provides a streaming abstraction over messaging, based on the publish and subscribe
+ integration pattern. Spring Cloud Stream currently comes with built-in support for Apache Kafka and 
+ RabbitMQ. A number of separate projects exist that provide integration with other popular messaging 
+ systems. See https://github.com/spring-cloud?q=binder for more details.
+ 
+ The core concepts in Spring Cloud Stream are as follows:
+ 
+- Message: A data structure that’s used to describe data sent to and received from a messaging system.
+- Publisher: Sends messages to the messaging system, also known as a Supplier.
+- Subscriber: Receives messages from the messaging system, also known as a Consumer.
+- Destination: Used to communicate with the messaging system. Publishers use output destinations and 
+subscribers use input destinations. Destinations are mapped by the specific binders to queues and topics 
+in the underlying messaging system.
+- Binder: A binder provides the actual integration with a specific messaging system, similar to what a JDBC 
+driver does for a specific type of database.
+
+** Docker
+
+ Docker made the concept of containers as a lightweight alternative to virtual machines very popular in 2013.
+ A container is actually a process in a Linux host that uses Linux namespaces to provide isolation between 
+ different containers, in terms of their use of global system resources such as users, processes, 
+ filesystems, and networking. 
+ 
+ Containers are very useful during both development and testing. Being able to start up a complete system 
+ landscape of cooperating microservices and resource managers (for example, database servers, messaging 
+ brokers, and so on) with a single command for testing is simply amazing.
+ 
+ For production usage, we need a container orchestrator such as Kubernetes. We will come back to container
+ orchestrators and Kubernetes later in this book.
+ 
+ FROM openjdk:17
+MAINTAINER Magnus Larsson <magnus.larsson.ml@gmail.com>
+EXPOSE 8080
+ADD ./build/libs/*.jar app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
+
+
+f we want to start and stop many containers with one command, Docker Compose is the perfect tool. 
+Docker Compose uses a YAML file to describe the containers to be managed.
+
+For our microservices, it might look something like the following:
+product:
+ build: microservices/product-service
+recommendation:
+ build: microservices/recommendation-service
+review:
+  build: microservices/review-service
+composite:
+  build: microservices/product-composite-service
+  ports:
+    - "8080:8080"
+	
+	
+	
+Summary
+
+t is strongly opinionated in terms of how to set up both core modules from the Spring Framework and 
+third-party tools. Using Spring WebFlux, we can develop microservices that expose reactive, that is,
+ non-blocking, REST services. To document these REST services, we can use springdoc-openapi to create 
+ OpenAPI-based documentation for the APIs. If we need to persist data used by the microservices, we can 
+ use Spring Data, which provides an elegant abstraction for accessing and manipulating persistent data
+ using entities and repositories. Spring Data’s programming model is similar, but not fully portable between
+ different types of databases, for example, relational, document, key-value, and graph databases.
+
+
+If we prefer sending messages asynchronously between our microservices, we can use Spring Cloud Stream, 
+which provides a streaming abstraction over messaging. Spring Cloud Stream comes with out-of-the-box support
+ for Apache Kafka and RabbitMQ but can be extended to support other messaging brokers using custom binders. 
+ Finally

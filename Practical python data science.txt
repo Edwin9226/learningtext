@@ -1,0 +1,72 @@
+Practical python data science
+
+Data Science is a fat-emerging field of study and research.
+There are several things happening concurrently in the IT domain.
+
+1.- With the surging popularity of digitalizacio an ¿d edge technology,
+3. There is a faster maturity and stability of scores of connectivity technologies, it
+is anticipated that there will be billions of connected embedded systems
+4. With the wider acceptance and adoption of the microservices architecture (MSA)
+and event-driven architecture (EDA) patterns for producing and sustaining
+enterprise-scale applications, there is a rapid rise in the number of usable and
+reusable event-driven microservices
+With the purposeful interactions between digitized entities, connected devices
+and interoperable microservices, there is a massive amount of multi-structured
+data getting produced, collected, cleansed, and crunched meticulously
+6. There are data analytics and science platforms in plenty to discover and
+disseminate knowledge out of data heaps
+The implications of the various digital technologies and tools are given below. In
+the years ahead, we will be bombarded with
+!" Millions of microservices;
+!" Billions of connected devices;
+!" Trillions of digital entities
+
+However, if generated data are not subjected to a series of deeper investigations to 
+squeeze out actionable insights in the time, then the data goes off wastefully.
+
+Precisely speaking, every data (internal and external) being produced by any establishment has
+ to be meticulously collected, processed, and mined in order to realize the much-needed cognition not only
+ for human beings in their everyday decisions, deals, and deeds but also for devices and
+machines to be intelligent in their operations, outputs, and offerings
+
+Python is emerging as the leading programming language for data science projects.
+
+ The following libraries are enabling data science
+applications and are made available in Python:
+1. NumPy: This is a library that makes a variety of mathematical and statistical
+operations easier and faster. This is also the basis for many features of the Pandas
+library.
+2. Pandas:*8,!3*9:%,)$*6!;/(/:*!3*'/#(%#"*34#'!&'(66:*%)*.('!6!%(%#*+)/<!$0*+!%,*
+data. This is one of the gamechangers for the tremendous success of data science
+projects.
+3. Matplotlib: This is a visualization library that makes it quick and easy to
+generate charts from data.
+4. Scikit-Learn: This is the most popular library for machine learning (ML) work
+in Python.
+There are dedicated chapters for producing machine learning applications. 
+
+This book is being prepared with the intention of empowering
+data scientists with all the vital details about programming using the Python language.
+
+-** Introduction
+Digital innovations and disruptions are frequently and feverishly happening in the
+business domain these days.
+In this chapter, we are discussing the prominent domains, which are gaining
+immensely through the unique capabilities of Python.
+
+1.4 Artifiial Intelligece AI applications.
+
+The domain of data science (DS) is gaining surging popularity these days as it
+has the wherewithal to discover knowledge out of massive amount of multistructured data.
+ AI algorithms, especially machine and deep learning (ML/
+DL) algorithms contribute immensely for the spectacular success of the DS
+domain
+
+Having understood this need, there came a number of unique libraries
+as enumerated below:
+H* SciPy for scientific and tecnical computing 
+H* Pandas for data analysis and manipulation;
+H* Kerass for artificial neural networks (ANNs)
+H* TensorFlow for ML tasks and deep neural networks (DNNs);
+H* NumPy for complex mathematical functions and computation;
+H* Scikit-learn for working with various ML models.

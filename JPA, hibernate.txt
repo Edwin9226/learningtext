@@ -1,0 +1,22 @@
+Te java apllication, creates a statement, execute it, retrieves the resulset, traverses and processes the 
+result.
+
+-- JDBC Driver 
+Sun has divided the  implement types into four categorie:
+type 1: JDBC-ODBC(Open DAtabase COnecction) Bridge
+typpe 2: NAtive-API driver
+Type 3: Network- Protocol Driver(Middleware driver)
+Type 4: Database-Protocol Driver (Pure JAva Driver)
+
+Which driver should be used?
+•	 If you are accessing one type of database, such as Oracle, Sybase, or IBM, the
+preferred driver type is 4.
+•	 If your Java application is accessing multiple types of databases at the same
+time, type 3 is the preferred driver.
+•	 Type 2 drivers are useful in situations where a type 3 or type 4 driver is not
+available for your database yet.
+•	 The type 1 driver is not considered a deployment-level driver and is typically
+used for development and testing purposes only.
+•	 Apart from the four drivers listed by the sun recently, there is a type 5 driver
+
+2.- Performing Insert, Update, DElete and Select Operations.

@@ -1,0 +1,223 @@
+JAva PErsistencia with Spring Data and Hibernate
+
+JPA, NAtive HIbernate, Spring Data JPA
+
+Data persistence is a crucial part of any application, and databases are indisputably at the core of the
+ modern enterprise.
+ 
+ This demands that the developer be knowledgeable about the application and its data requirements, as well
+ as the SQL query language, relational storage structures, and the potential for optimization.
+ 
+ how to retrieve objects efficiently by querying JPA with Querydsl; 
+ how to process and manage transactions with Spring Data and Hibernate; 
+ how to create fetch plans, strategies, and profiles; 
+ how to filter data; 
+ how to configure Hibernate for use in both managed and unmanaged environments;
+ and how to use their commands. 
+ 
+  Thus prepared, in chapter 3 you’ll be ready to learn how to design and implement complex business domain 
+  models in Java, and which mapping metadata options you have available.
+  
+  Then chapter 4 will examine working with Spring Data JPA and its features.
+  
+   Java domain models and in what format you prefer to work with ORM metadata.
+   
+   1 Understanding object/relational persistence
+   
+  * Persisting with SQL databases in Java applications
+An* alyzing the object/relational paradigm mismatch
+In* Introducing ORM, JPA, Hibernate, and Spring Data
+
+Persistence has always been a hot topic of debate in the Java community. Is persistence a problem that has
+ already been solved by SQL and extensions such as stored procedures,
+ 
+ 1.1.2 Understanding SQL
+ To use JPA, Hibernate, and Spring Data effectively, you must start with a solid understanding of the 
+ relational model and SQL
+ 
+  When this schema is ready, you can use SQL as a data manipulation language (DML) to perform operations on
+  data, including insertions, updates, and deletions. You can retrieve data by executing data query language 
+  (DQL) statements with restrictions, projections, and Cartesian products. 
+  DDL statements after data has been stored; this is known as schema evolution. You may also use SQL as a data 
+  control language (DCL) to grant and revoke access to the database or parts of it.
+  
+  SQL is executed, get a copy of the excellent book SQL Tuning by Dan Tow (Tow, 2003=
+  
+  Generic data management tools such as ACID-compliant transactional SQL databases, JDBC, Hibernate, and Spring
+  Data would play only a minor role for these types of systems.
+  
+  In this book, we’ll consider the problems of data storage and sharing in the context of an object-oriented 
+  application that uses a domain model.
+   Design Patterns: Elements of Reusable Object-Oriented Software [Gamma, 1994])
+   
+   But for applications with nontrivial business logic, the domain model approach helps to improve code reuse 
+   and maintainability significantly. In practice, both strategies are common and needed.
+   
+   CREATE TABLE USERS (
+    USERNAME VARCHAR(15) NOT NULL PRIMARY KEY,
+    ADDRESS VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE BILLINGDETAILS (
+    ACCOUNT VARCHAR(15) NOT NULL PRIMARY KEY,
+    BANKNAME VARCHAR(255) NOT NULL,
+    USERNAME VARCHAR(15) NOT NULL,
+    FOREIGN KEY (USERNAME) REFERENCES USERS(USERNAME)
+);
+
+1.2.1 The problem of granularity
+
+ou could add these properties directly to the User class, but because other classes in the system will likely 
+also carry address information, it makes more sense to create an Address class to reuse it.
+The User has an Address.
+
+CREATE TABLE USERS (
+    USERNAME VARCHAR(15) NOT NULL PRIMARY KEY,
+    ADDRESS ADDRESS NOT NULL
+);
+
+A new Address type (class) in Java and a new ADDRESS SQL data type should guarantee interoperability. But
+ you’ll find various problems if you check on the support for user-defined data types (UDTs) in today’s SQL 
+ database management systems.
+ 
+ UDT support is one of several so-called object/relational extensions to traditional SQL.
+ The pragmatic solution for this problem has several columns of built-in vendor-defined SQL types (such as 
+ Boolean, numeric, and string data types).
+ 
+ CREATE TABLE USERS (
+    USERNAME VARCHAR(15) NOT NULL PRIMARY KEY,
+    ADDRESS_STREET VARCHAR(255) NOT NULL,
+    ADDRESS_ZIPCODE VARCHAR(5) NOT NULL,
+    ADDRESS_CITY VARCHAR(255) NOT NULL
+);
+
+1.2.2 The prooblem of Inheritance 
+
+In java, you implement typ e inheritance using superclasses and subclasses.
+
+Using Inheritance for different billing strategies 
+
+We haven’t finished with inheritance. As soon as we introduce inheritance into the model, we have the possibility 
+of polymorphism.
+
+we want to be able to write polymorphic queries that refer to the BillingDetails class and have the query return
+ instances of its subclasses.
+ The next aspect of the object/relational mismatch problem is the issue of object identity.
+ 
+ 1.2.3 The problem of identity
+ 
+ JAva  defines two different notion of sameness:
+ * Instance identity (roughly equivalent to a memory location, checked with a==b)
+ * Intance equality, as determined by the implementation of te equals() method.
+ 
+ To solve this problem, later in this book we’ll recommend that you use surrogate keys whenever you can’t 
+ find a good natural key. 
+ A surrogate key column is a primary key column with no meaning to the application user—in other words, a key 
+ that isn’t presented to the application user. Its only purpose is to identify data inside the application.
+ 
+ 
+CREATE TABLE USERS (
+    ID BIGINT NOT NULL PRIMARY KEY,
+    USERNAME VARCHAR(15) NOT NULL UNIQUE,
+     . . .
+);
+CREATE TABLE BILLINGDETAILS (
+    ID BIGINT NOT NULL PRIMARY KEY,
+    ACCOUNT VARCHAR(15) NOT NULL,
+    BANKNAME VARCHAR(255) NOT NULL,
+    USER_ID BIGINT NOT NULL,
+    FOREIGN KEY (USER_ID) REFERENCES USERS(ID)
+);
+
+1.2.4 the problem of associations
+
+In the domain model, associations represent the relationships between entities. 
+Object-oriented languages represent associations using object references, but in the relational world, a 
+foreign key–constrained column represents an association with copies of key values. The constraint is a rule
+ that guarantees the integrity of the association. There are substantial differences between the two 
+ mechanisms.
+ 
+ 
+ If you wish to represent a many-to-many association in an SQL database, you must introduce a new table, 
+ usually called a link table. In most cases, this table doesn’t appear anywhere in the domain model. For 
+ this example, if you consider the relationship between the user and the billing information to be
+ many-to-many, you would define the link table as follows:
+ 
+ CREATE TABLE USER_BILLINGDETAILS (
+    USER_ID BIGINT,
+    BILLINGDETAILS_ID BIGINT,
+    PRIMARY KEY (USER_ID, BILLINGDETAILS_ID),
+    FOREIGN KEY (USER_ID) REFERENCES USERS(ID),
+    FOREIGN KEY (BILLINGDETAILS_ID) REFERENCES BILLINGDETAILS(ID)
+);
+
+1.2.5The problem of data navigation 
+
+ In Java, when you access a user’s billing information, you call 
+ someUser.getBillingDetails().iterator().next() or something similar. Or, starting from Java 8, you may call
+ someUser.getBillingDetails().stream() .filter(someCondition).map(someMapping).forEach(billingDetails-> 
+ {doSomething (billingDetails)}).
+ 
+  The most obvious way to do this is to minimize the number of SQL queries. 
+  (Of course, other, more sophisticated, ways—such as extensive caching—follow as a second step.)
+  
+  SELECT * FROM USERS, BILLINGDETAILS
+WHERE USERS.ID = 123 AND
+BILLINGDETAILS.ID = USERS.ID
+
+Any object persistence solution permits you to fetch the data of associated instances only when the association 
+is first accessed in the Java code.
+ This is known as lazy loading : retrieving data only on demand. 
+ This piecemeal style of data access is fundamentally inefficient in the context of an SQL database, because 
+ it requires executing one statement for each node or collection of the object network that is accessed.
+ 
+  Hibernate provides sophisticated features for efficiently and transparently fetching networks of objects from 
+  the database to the application accessing them.
+  
+  It can be costly (in time and effort) to find solutions, as you may know from experience. It will take us a
+  large part of this book to provide detailed answers to these questions and to demonstrate ORM as a viable 
+   solution
+  
+  1.3 ORM, JPA , Hibernate, and Spring Data
+  
+  To use Hibernate effectively, you must be able to view and interpret the SQL statements it issues and 
+  understand their performance implications. To take advantage of the benefits of Spring Data, you must be 
+  able to anticipate how the boilerplate code and the generated queries are created.
+  
+  The JPA specification defines the following:
+  
+  * A facility for specifying mapping metadata.
+  * APIs for performing basic CRUD operations on instances of persistent classes, most prominently 
+	javax.persistence.EntityManager for storing and loading data.
+   * A language and APIs for specifying queries that refer to classes and properties of classes.
+   The standardized API allows for the programmatic creation of criteria queries without string manipulation.
+   * How the persistence engine interacts with transactional instances to perform dirty checking, association
+   fetching, and other optimization functions.
+   
+  Hibernate implements JPA and supports all the standardized mappings, queries, and programming interfaces
+  * Productivity
+  * Maintainability—Automated ORM with Hibernate reduces lines of code, making the system more understandable
+  and easier to refactor.
+  * Performance—Although hand-coded persistence might be faster in the same sense that assembly code can be 
+  faster than Java code, automated solutions like Hibernate allow the use of many optimizations at all times
+  * Vendor independence—Hibernate can help mitigate some of the risks associated with vendor lock-in. Even if
+  you plan never to change your DBMS product, ORM tools that support several different DBMS
+  
+   Introducing Imbernate 
+    Hibernate is not only an ORM service but also a collection of data management tools extending well beyond ORM.
+	* Hybernate ORM
+	*Hibernate EntityMAnager: It’s an optional module you can stack on top of Hibernate ORM. Hibernate’s 
+	native features are a superset of the JPA persistence features in every respect.
+	* Hibernate Reactive - reacti ve API for hibernate ORM, inractng with database in a non-blocking 
+    manner. It support non-blocking database drivers. 
+	
+	2.2 Introducing Spring Data 
+	purpose is to simplifyaccess to both relational and NOSQL databases.
+	
+	* Spring data Commons.- provides a meta data model for persisting JAVA classes and tecnology-neutral 
+	repository interfaces.
+	** Sprinfg data JPA reduce the Boilerplate.
+	* Spring data JDBC: It provides improved support for for JDBC- bsed access layers.
+	* Spring Data REst.
+	* Spring DAta MOngo DB
+	* Spring Data redis.

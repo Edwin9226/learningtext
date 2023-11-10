@@ -1,0 +1,17 @@
+Arquitectura exagonal
+
+Port : puertos de comunicación en las diferentes capas
+and adapters
+
+La modularidad es la propiedad que permite subdividir una aplicación en partes más pequeñas 
+(llamadas módulos), cada una de las cuales debe ser tan independiente como sea posible 
+de la aplicación en sí y de las partes restantes.
+
+su estructura y organización.
+separar 
+*Dominio (Entidades,Eventos, repositorios y Servicios)
+* Aplicación: Casos de uso la Lógica de negocio
+* De al infraestructura externa: RestClient RabbitMqAdapter , Controladores, Entity MAnager, Mail ADapter
+
+LAs capas mas internas no pueden depender de capas más externas.
+D : Inversion de dependencia de S

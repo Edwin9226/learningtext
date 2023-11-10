@@ -1,0 +1,63 @@
+C:\Program Files (x86)\Common Files\Oracle\Java\javapath
+
+Testing, allowing you to catch bugs, ensure your code function as intended, and provide confidence in the
+reliability and stability of your applications.
+Share time-tested recipes for success,and equip you with the tools and Knowledge you need to write 
+pcomprehensive and effective test.
+
+** Spring bott Testing Pitfalls
+SB application effectively can d¿be a hurdle, 
+
+** SB Testin gPitfall 1 : @Mock vs @MockBean
+The objects our class under test depends on.
+
+** SB Testing Pitfal 2: Extensive usage of @SpringBootTest
+
+We should try to test and verify as much of our implemnttion as possible on a lower testin glevel.
+
+We can ensure ou rSpring Secut¿rity configuration is working by using @WebMvcTest.
+
+** TEsting pitfall 3 : Not testing allowing
+
+how can we ever say it’s working? While we might have
+checked our implementation manually, how can we ensure any upcoming
+changes don’t break our feature? 
+
+Whether we write the test before the implementation (aka. test-driven development)
+ or afterward depends on personal preferences.
+ I’ve had a great experience writing the
+test first, leading to more thoughtful design and smaller steps.
+
+
+The Spring Framework and Spring Boot emphasize the importance of testing and 
+encourage us to write tests by having great testing support and tools.
+
+https://rieckpil.de/guide-to-testing-with-spring-boot-starter-test/
+
+https://rieckpil.de/difference-between-mock-and-mockbean-spring-boot-applications/
+https://rieckpil.de/difference-between-mock-and-mockbean-spring-boot-applications/
+https://rieckpil.de/spring-boot-unit-and-integration-testing-overview/
+
+
+*
+ Rule #1 One assertion per test or single concept by a test
+ Rule# 2 Test one single object at a time 
+ Rule# 3 Choose meaningful test mewthod names
+
+
+Cucumber & Java 
+
+* Project 6 Enviroment Set-up
+* Features
+* Glue
+* Data Tables
+* Data Driven Testing
+* Java & Cucumber 
+* Junit Test Runner
+
+* Hooks 
+* Optimise Glue
+* Dependency Injection
+* Refactoring 
+* Debugging
+* Rinning Scripts & Reporting

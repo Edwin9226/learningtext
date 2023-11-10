@@ -1,0 +1,40 @@
+what is testing 
+What is quality
+Why we need to write testing
+Function of testing 
+Types of testing
+Defect Cost Increase
+Functional VS Non-Functional Requirements
+What kind of tests developers usually write
+
+Product Owner (The voice of the Customer)
+ Owner worried about features, user experience and all that is related to the application.
+ 
+ Quality is a degreee of compliance with requirements. 
+ 
+ Functions 
+ * Increasing team productivity 
+ * Linit need for debugging
+ * Confic¿dence during the refactoring
+ * Clean code and good arquitecture design 
+ * Enabling test code coverage metric
+ * Documentation
+ 
+ Clean cut and good architecture design in this course, we will also learn TDD and howit works.
+ 
+ There are two main method o testing Ziya black Box yesting and one box testing.
+ 
+ BBT: is a method of software testing that examines the functionality of an application without peer
+ into its internal structures or workings.
+ 
+ WBT: Is also known as glass box test and trasparent box testing, is a method of sotfware testing 
+ that in  general structures or rockets of an application as opposed to its functionality nd BBT.
+ 
+ -- Testing Levels & Testing Pyramid
+ 
+ *			Acceptance Testing
+ *		System Testing
+ *	Integration Testing
+ * Unit Testing
+ 
+ 

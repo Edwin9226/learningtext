@@ -1,0 +1,95 @@
+CSS GRID
+
+• The basics
+• The advanced things
+• How grids can be used in design
+• When not to use grids at all
+• CSS Grid’s relation to its cousin Flexbox
+
+basic CSS rules to understand how the grid model works.
+ we’ll look at how grids are structured and how we can visually represent them
+ 
+ • Understanding the basic rules related to CSS Grid
+• Using grid templates
+• Grid flow
+• Understanding special grid-related units, keywords, and functions
+• Using shortcuts
+
+Grids provide clarity about content structure and sizing and allow us to steer
+where things are placed. Grids provide structure.
+
+*
+
+* Arranging grid elements
+To be able to move elements, we first need to state the number of grid rows and grid columns explicitly.
+using the grid-template-rows and grid-template-columns rules.
+The size may vary from row to row and column to column.
+We can, for example, define a grid with three rows and three columns and only arrange five items
+within it—a case that’s common in galleries or news websites.
+
+fr is a unit that has been introduced to CSS with CSS Grid
+and works exclusively with grids. 1fr essentially means: Take one unit of free space for this grid element
+
+rules 
+
+.container {
+display: grid;
+grid-template-columns: 1fr 3fr;
+grid-template-rows: 1fr 4fr 1fr;
+}
+
+grid-column-start, grid-column-end, grid-row-start, and grid-row-end
+grid-column-end: span 2
+grid-column-end: span 2;
+
+** Adding some breathing room (or gaps)
+
+. Either we can use paddings and margins (use text and inage a border effect) to try to get the spacing 
+right or  we can use CSS Grid’s column-gap and row-gap rules.
+These two rules are defined on the container level and govern the space between all rows and all
+columns.
+
+We can use any unit we’d like—so, px, rem, em, or even %
+
+In summary, to avoid unexpected behavior in element sizing, it’s recommended to use non-relative
+units for gaps
+
+** Using grid templates
+
+ CSS Grid offers us possibilities to be more explicit. We’ll now have a look at how to name
+rows, columns, and entire grid areas.
+
+*** Grid flow
+
+row (the default value): This fills elements row by row, from left to right. If an element does
+not have enough space to be placed in a row, it is moved to the next one.
+• column: Behaves the same as row, except for the direction—it will fill columns first, top to
+bottom, and move to the next column once the previous one is full.
+• dense: Tries to fill in any holes in the grid, no matter their placement. This is interesting if we
+have many different-sized elements that need no particular order, such as randomized mood
+images on restaurant websites.
+• row dense and column dense: These values are combinations of the previous three. They
+will first try to fill in rows and columns, respectively, and then fill any resulting holes. Since
+row is the default value, row dense is equivalent to just using dense.
+
+*** Understanding special grid-related units, keywords, and functions
+
+Many of these are specifically
+for CSS Grid; however, some might be useful for Flexbox layouts and other use cases.
+
+** The fractional unit
+
+When defining grid templates, we can mix in other units, such as px or rem, to denote fixed-size
+grid cells. CSS Grid will then take the total width, deduct the fixed-size cells, and then calculate the
+parts again.
+fr uses what is left over after all fixed-size elements are subtracted.
+
+** Sizing keywords and functions
+CSS Grid offers four different keywords and three functions we can use. Most of
+them are related to the content of the grid cell and will be calculated once the size of the content is
+known, allowing us to have different-sized grids for each content variant.
+
+The four keywords are min-content, max-content, fit-content, and auto.
+
+The three functions are min(), max(), and minmax(). We can also use these as a substitute for
+any value with a unit.

@@ -1,0 +1,87 @@
+Preguntas cualitativas, cuales son las razones.
+
+UX
+Interaction Design 
+Wireframes
+Information Arquitect 
+User Research
+Senarios 
+
+UI
+Visual Design 
+Colours
+Graphic DEsign 
+Layout 
+Typography
+
+-First sebnarrios 
+
+They determined the structure of the interface and the functonallly, ho wit s organized and 
+how all the aprts relate to one another.
+
+-- Secon escenarios 
+Ux design 
+Wider frame renderin gof the interface interaction and get it was.
+
+Flow the app How all the buttons navigating you through your tas and how th einterface 
+efficiently server up to information user needs.
+
+
+
+
+client services interfaces
+MAterial design
+
+Core- Framework de estructura
+Directivas manejar los DOms -> Funcionalidades que agregan la Dom
+
+M[odulos, deprecados formas de estructurar nuestro Códigos,  Features, 
+Shared Module  
+
+Revolución V16
+
+Standalone COmponents --> basta a los módulos
+
+Compoente tiene que estar si o si en un módulo..
+
+Módulo tenia las dependencias y ahora el componente va a poseer las dependenciuas 
+
+
+**Ventajas 
+ - Estructura
+ - Robuisto
+ - Requerimientos bien definidos
+ - opinado
+ 
+ ** Desventajas
+ - Curva de aprendizaje
+  * Simplificar 
+  *mejorar la documentacion 
+  * calidad de desarrollo
+  
+ - Directivas propias de angular
+ - requerimientos cambiantes
+ - Verborajico-> modulo -> dependencia -> Componente
+ 
+Esmodules-> vitejs
+
+signals -> Rxjs chao se elimina Rxjs-> ngzone
+Directivas X-> template Signal ->¨{
+signal componente
+1 Directiva por tag
+
+<div>-> render por condición 
+
+KArma + JAsmin
+
+JEST para test
+
+SSR serser side renderizing-> Servidor - cliente
+
+
+Angular Way-> 
+
+
+ng generate @angular/core:standalone
+
+ng new --standalone name

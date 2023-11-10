@@ -1,0 +1,47 @@
+** Docker 
+FROM openjdk:17
+MAINTAINER Magnus Larsson <magnus.larsson.ml@gmail.com>
+EXPOSE 8080
+ADD ./build/libs/*.jar app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
+
+For our microservices, it might look something like the following:
+
+product:
+ build: microservices/product-service
+recommendation:
+ build: microservices/recommendation-service
+review:
+  build: microservices/review-service
+composite:
+  build: microservices/product-composite-service
+  ports:
+    - "8080:8080"
+	
+Let me explain the preceding source code a little:
+
+The build directive is used to specify which Dockerfile to use for each microservice.
+ Docker Compose will use it to build a Docker image and then launch a Docker container based on that Docker
+ image.
+The ports directive for the composite service is used to expose port 8080 on the server where Docker runs.
+ On a developer’s machine, this means that the port of the composite service can be reached simply by using 
+ localhost:8080!
+ 
+All the containers in the YAML files can be managed with simple commands such as the following:
+
+- docker-compose up -d: 
+Starts all containers. -d means that the containers run in the background, not locking the terminal from 
+where the command was executed.
+
+- docker-compose down:
+ Stops and removes all containers.
+ 
+- docker-compose logs -f --tail=0: 
+Prints out log messages from all containers. -f means that the command
+ will not complete, and instead waits for new log messages. --tail=0 means that we don’t want to see any
+ previous log messages, only new ones. 
+ 
+ ** Idea*
+ For a full list of Docker Compose commands, see https://docs.docker.com/compose/reference/.
+ 
+ 

@@ -1,0 +1,44 @@
+Super clean code in Angular
+
+Tools are not enough
+
+* Tool must be used within  established best practice for a clean, performant and maintainable Angular Codebase.
+* PAradigms & PAtterns: The approach to code
+* Arquitecture: he structure of your code
+* Implementation: The process you us to build the desired arquitecture
+*
+
+Patten + Declarative + REactive , -- IMperative
+
+* 100% Decarative & Reactive 
+	- use rxjs: Encapsulate logic by declaring data relationships and composing Observables
+	- Use the | asyn cpipe to subscribe 
+	- ALL your components MUSt have .onPush change detection  strategy
+	- Use ReactiveForms and Angular MAterial (Components or CDK)
+	-USe @ngrx-component -store for managing the state at the component level
+	
+* - % Imperative 
+	-Limit your imperative code to whhen it is UNAVOIDABLE and WITHOUTG compromising
+	the overall reactivity
+	- It's ok to be imperative on set @input() .@tap() in Effects.
+	
+Architecture
+Feature = Data + Store + Container  + PResentation
+
+* Presentation components
+	- Only @Input(), @Ouput() and Reactive Forms.
+	- NO LOGIC & NOT STATE (no "this ", variables except inputs and outputs).
+* Container Component.
+	- Orchestrastes the presentation components (pases values through) async, handle 
+	@ouput events
+	- NO LOGIC & NOT STATE (no "this ", variables except imports from Store selectores).
+	- Communicates with the Component Store (initialises and updates the state, imports selectores)
+	
+* Components Store
+	- state, Selectore, Combinated Selectores, Updaters, Effects.
+	- Most of the logic is DECLARED by combining selectores sand establishing 
+	logical relationships between them.
+* Data services
+	-for retrieving data from APIS, only injected in the Store.
+
+@ngrx-component-state

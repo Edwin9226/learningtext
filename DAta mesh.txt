@@ -1,0 +1,734 @@
+It is no longer sufficient to store your massive data sets in big data lake to bath analysis.
+
+
+DAta mesh is a fundamental shift in the way think about, create, share, and use data,
+
+at ist heart, data mesh is a much about technological reorganization as it is about
+the reorgoniaziation as it is about the regotiation of social contracts, responsibilities,
+and expectations
+that we can do helpful and useful things: better service for our customers, error-free
+reporting, actionable insights, and enabling truly data-driven p.rocesses
+
+we first need an idea of the main data problems facing a moder bussiness:
+
+* Big data System, underpinning a company's businness analytics engine, have exploded
+in size and complexity. There have been manny attempts to address and reduce this 
+complexity,but they all fall short of the mark.
+
+* Second, bussiness oerations for large companies have long since passed the point of 
+being served by a single monolithic deployment. Multmiservice deployments are the 
+norm, including microservice and service-oriented architectures. the boundaries of 
+these modular systems are seldomly easly defined, especially when many separate 
+operational and analytical systens rely on read-only access to the same data sets.
+There is an oposing tension here: on one hand, colocating business functions in a 
+single aplication provides consistent access to all data produced and stored in that 
+system
+
+* thrid a problem common to both oerational and analytical domains: the inability 
+to access high-quality, well-documented, self-updating, and reliable data.
+This pressure deals the final blow to the ideal of keeping everything in a single 
+databases and forces developers to split up monolithic applications into separate 
+deployments with their own databases. Meanwhile, The big data teams struggle
+to keep up with the fragmentation and refactoring of these operational systems, as
+they remain solely resonsible for obtainig their own data.
+
+
+This application-first thinking reamins the major source of problems in today's 
+comuting enviroments:
+- leading to ad hoc data pipelines
+- cobbled together data access mechanisms
+- inconsistent sources of similar-yet-different thruth.
+
+Important business data nedds to readil and reliably available as building block
+primitives for your applications, regardless of the runtime, environment, or 
+codebaseof your application.
+
+Event streams are the ideal mechanism for serving this data, providing a simple yet
+ powerful way of reliably communicating important business data across an 
+ organization, enabling each consumer to access and use the data primitives they need.
+ 
+ 
+ 
+ What is DAta Mesh?
+ It's social and technological shift in the way that data is created, accessed, and 
+ shared across organizations.
+ 
+ Data mesh provides a lingua franca for discussing the needs and responsibilities 
+ of diferrent teams, domains, and services and how to they can work toguether to 
+ make data a first class citizen.
+ 
+Building Event-Driven Microservices. I introduced the term data communication layer,.
+
+The principles of the data communication layer were simple enugh: 
+- treat data as first-class citizen.
+- Formalize the structure for communication between doamins.
+- Publis data to event streams for general purpose usage.
+
+ and make it easy to use for both the producers and consumers of data.
+ 
+ Data mesh is based on four main principles: 
+ - domain ownership
+ - DAta as a product
+ - federated governance
+ - self-service platform.
+ 
+ Together, these principles help us structure a way to communicate important 
+ business data across the entire organization. 
+
+** AN Even Driven data mesh 
+The modern competitive requirements of big data in motion , combined with modern 
+cloud computing, require a rethink of how businesses create, store, move, and use data.
+
+
+Producers write their important bussines domiiain data to an event stremam, enabling others others 
+couple to coupleon that stream abd use the dta building blocks fortheir own applications.
+
+Consumer spplications can in turn crate their own event streams to share their own 
+bussiness facts with others.
+
+This diagram represents just the tip of the data mesh iceberg. 
+
+** USing data in the Operational Plane
+
+We{ll focus on some of the oerational plane and the common challengesof sharing business data with other 
+operational (and analytical ) services.
+
+*** The DAta Monolith
+
+Online transaction processing (OLTP) databases form the absis of much of today's.
+operational computer services.
+
+Together databases and application demonstrate the following monolithic princies:
+
+- The databases is the sources of thruth
+- DAta is trongly consistent
+- REad-ony data is readilyavailibly
+
+note that the dabase should  be directly accessed only by the swrvice that owns it, and not used as an
+ integration point.
+ 
+ ** the difficulties of communicating data for operating Concerns.
+ 
+ However, this is rarely the case, as bussiness dataare effectively a set of overlapping domains, particulary
+ the common core, with the same data serving multiple bussiness reuirements.
+ 
+ requires a new application powered by a document-based database for plain text search functionality.
+ 
+ the two ways . 
+ one is to replicate and transform the data to the search engine.
+ Second , is to use APIs to rstructure the service boundaries of the source system, such that the same 
+ data isn't simply copy out
+ 
+ -- Stratyegy 1 : Replicate data between services.
+ 
+ the frist and ssimplest is to just reach into the database and grab the data you need, when you need it.
+ 
+ -* Tight coupling with the source 
+ -* Perfromance load on the source: LArge data sets and complex queries can grind the database to a halt.
+ This ius especiallly true in the case of denormalizing data for analytical use cases, where multitable
+ and complex joins are common.
+ 
+ the second most common mechanism for the data replication strategy is read-only replica of the 
+ source database.consumers still remain coupled on the internal model. And, unfortunately,
+ each additional external coupling on the internal data model make change more expensive, risky,
+ and difficult for all involved members.
+ 
+ Coupling on the internal data model of a source system causes many problems. the source model wll change 
+ in the course of normal bussiness evolution, which often causes breakages in both thje periodic queries 
+and internal operations of all external consumers. Each coupled services will need to refactor its copy
+of the model to match what is available from the source, migrate data from the old model o the new model,
+an d update its business code acordingly. 
+
+this introduces a few new issues:
+
+*- the orifginal data set can be difficult t discover 
+*- increase in point-to-point connections
+
+-- strategy 2: USe APIs to avoid data replication needs
+Directly coupled request-response microservices, also sometime knwn as synchronous microservices, are 
+another common approach to dealing with accessing remote data.
+
+Synchronous microserviecs have many benefits.
+
+- purpose-built services sserve the needs of the bussines domain
+- The owners have a high level of independence to use tools, tecnologies, amd models that work
+best for their needs.
+- TEams also have more control over the boundaries of their domains, includig control and decision making
+over how to expand tham to help serve other clients needs.
+
+synchronous microservices, such as Building Microservices by Sam Newman (O’Reilly) and Microservices Patterns by Chris
+Richardson (Manning),
+
+While this form of data access can be served via a synchronous API, it may not be suitable for all use cases.
+
+** the analytical Plane . Data Warehouses and Data Lakes
+
+Online analyticcal processing (OLaP) system store data on different dimensionns. Getting data into a  data warehouse 
+has historically relied on a process known as Extract, transform, and LOAd (ETL).
+
+The need for massive scale was plainly evident to Google, which published >The Google File System in Octobewr, 2003. 
+thisa is the era that saw the birth of big data and caused a massive global rethink of how we create, store
+, process and ultimately use data. 
+
+Apache HAdoop, intoduced the hadoop Distributed File Sys tem (HDFS), a durable , faultolerant filesystem that made it 
+possible to create, store, and process truly massive data sets spanning multiuple commodity hardware nodes.
+
+It paved the way for a bold new idea: copy all of the data you need into a single logical location, regardless
+of size, and apply processing to clean up, sort out , and remodel data into the required format for deriving 
+imortant bussines data analytics.
+
+
+Biig data architecture introduced a sgnificant  shift in the mentality toward data. in this new world of 
+big data, you were free to write data with or without any shema or structure and resolve it all later 
+at query time by applying shema on read.
+
+Consider Table 1.1, comparing the data strustures and use cases between the relational 
+}databases and MApReduce. 
+MApreduce is an early Hadoop processing framework and is what you would use to read data apply a schema, 
+perform transformations and aggregations, and produce the final result.
+
+Unfortunately, the fundamental principle of storing unstructured data to be used with
+schema on read proved to be one of the costliest and most damaging tenets intro‐
+duced by the big data revolution. Let’s take a look at precisely how this negatively
+affects distributed data access and why well-defined schematized data is such an
+important tenet of data mesh
+
+**- Te organizational Impact of schema on read 
+
+Enforcing a schewma at read time, instead of at wrime time, leads to a proliferation of whatwe call 
+"bad data". 
+
+this summary o froles is by and large universal to most cntemparary organizations using big data:
+
+* the data analyst
+Charged with answering business questions, generating insights, and creating data-driven reports. Data analysts
+ query the data  sets provided to them by the data engineers.
+
+**_ the data engineer 
+Charged with obtainning the important business data from systems around the organization and putting it 
+into a usable format for the data analysts.
+
+**_ The application developer
+Charged with deloping  an application to solve business problems. That applications databases is also the 
+source of data requiered by the data analysts to do their job.
+
+The data engineer would reach into the application developers database, grab the requiresd data, end pull it
+ out to put into HDFS. Data scientists would clean it up and restructure it,before passing it on to be used in analytics.
+ 
+ There are three main problems with this separation of concerns and responsabilities.
+ 
+ 
+ *-_ Problem 1. Violated data model boundaries 
+
+Data ingested into the analytics domain is coupled on the sources's internal data model an d results in
+ direct coupling by all downstream users of that data. Direct coupling on this internal model exposes all 
+ downstream users to these changes.
+ 
+ *-_ Problem 2: LAck of single ownership
+ 
+ Application developers are the domain experts and masters of the sources data model, but their responsibility for 
+ communicating that data to other data( such  as the big data team) is usually nonexistentr.
+ 
+ the data engineer is dependent on the data sources, but often has little to no influence on what happens 
+ to the data sources, making thier role very reactive. This production/data divide is a very real barrier in many 
+ organizations, and despite best-efforts, agreements, integration checks, and preventative tooling.
+ 
+ 
+ *-_ Problem 3 : Do-it-yourselft and custom point-to-point data conecctions 
+ 
+ For data organizations, it's common to pull the same data sources into multiple diffefrent subdoamins of the
+ data platform, depending on use cases, team boundaries, and tecnology boundaries.
+ 
+ this disjointed model and responsibilioties of data owwbership and distribution lead to bada data, which is 
+ costly in term of time, money, and missed opportunities. lET'S take a look at the costs, before wrapping 
+ ip with why data mesh purports to solve these issues.
+ 
+ **- Bad data: the Cost of Inaction
+ 
+ Bad data typically goes undetected until it is applied to a schema . Bad data is costly to fix, and 
+ it's more costly the more widespread it is.
+ 
+ Bussines decisions may also ahve been affected. Domain knowledge related to interpreting and understanding 
+ data remains incomplete, ad odes support from the owners of the original data.
+
+Data mesh propose to fix this issue by  promoting data to a first-class citizen, a product like any other.
+A data product with a well-defined scheama, domain  documentation, standardized access mechanisms, and 
+SLAs can substantially reduce the impact of bad data right at the source.
+ 
+*-_ Can we unify analytical and Operational Workflows?
+ 
+ there's one more problem that sits at the heart of engineering- it's not just the data team that has
+ these data access and quality problems.
+ But in each of these architectures, the service's data is encapsulated  within its own databases and is 
+ out of reach to other service.
+ 
+ Applications provide operational APIs that other applicatiins can call to do work on theri behalf.
+ 
+ Other use cases are not so clear cut. Consider an ecommerce retailer that wants to
+advertise shoes based on current inventory (operational), previous user purchases
+(analytical), and the user’s real-time estimated shopping session intentions (analytical
+and operational). In practice, the boundary between operational and analytical is sel‐
+dom neatly defined, and the exact same data set may be needed for a multitude of
+purposes—analytical, operational, or somewhere in between.
+
+*-_ rethinking Data with DAta Mesh
+
+publish important business data sets to dedicated, durable, and easily accessible datra structures known 
+as data products .
+
+Prospective consumers can explore, discover, and subscribe to the data products they need for their 
+business use cases.the data products should be well-described, easy to interpret. and form the basis 
+for a set of self-updating data primitives for powering both business services and analytics.
+
+Event streams play the optimal role for the foundation of data products because they
+offer the immutable, appendable, durable, and replayable substrate for all consumers.
+
+ A good engineering stack makes it easy to create and manage
+applications throughout their life cycle, including acquiring compute resources, pro‐
+viding scalability, logging, and monitoring capabilities. Event streams provide the
+modern engineering stack with the formalized and standardized access to the data it
+needs to get things done.
+
+How would a set of self-updating event streams relate to these principles?
+
+1.- The database is the source of truth -> The event stream is teh source of truth
+The owner of the data domain is now responsible for composing an externalfacing model and writing 
+it as a set of events to one (or more) event streams. In exchange, other services can no longer directly 
+access and couple on the internal data model, and the producer is no longer responsible 
+for serving tailored business tasks on behalf of the querying service, as is often the case in  
+a microservices architecture. 
+... The events stream becomes the main point of coupling between systems.
+... downstream services consume events from the event stream, model it for their purposes, and store
+it in their own dedicated data stores.
+
+2.-  Data is strongly consistent -> Data is eventually consistent
+the event stream producer can retain strong read-after-write consistency for its own internal state, along
+with other databases benefits such as local ACID transactions. Consumers of the event stream, however, 
+are independent in their processing of events and modeling of state and thus rely on their own 
+eventually consistent view of the processeddata. 
+A consumeer does nt have write-access to the event stream, and so cannot modify the source of data. Cosumer
+system designs must account for weventually consistency.
+
+3.- Read only data is readily available ( reamain unchanged!)
+
+Events streams provide the formalized mechanism for communicating data in a read-only, self-updating format,
+and consumers no longer need to create, manage, and maintain their own extraction mechanism.if a consumer
+applicatio needs to retain state, then it does so using its own dedicated data store, completely independent
+ot the producer's database.
+
+Data mesh formalize the ownership boundariess of data within an organization and standardizes the mechanims of
+storage and communication. It also provides a reusable framework for producing, consumin, modeling, and 
+using data, not only for current systems, but also systems yet to be built.
+
+
+**- Common Objections to an Event-Driven Data Mesh
+
+--.. Producers Cannot Model Data for Everyone's Use cases 
+
+The main duty of the producer is to provide an accurate and reliable external public model of its domain data
+for consumer use. These data models need to expose only the parts of the domain that others teams can 
+coupleon; the remainder of their internal mdel remains off limits.
+
+fr example an ecommerce domain  would have independent sales, items, and inventory models and event streams,
+simply detailing the current properties and values of each sale, item, and inventory leveel, wheres a shippign
+company amy have event streams for each shipment, truck, and driver.
+
+ these models are deliberately simple and focused on a single domain definition, resulting in tight, ,modular
+ data building blocks that other systems can use to build their own data models. Consumers that ingest these 
+ events can restructure them as needed, including joining them with events from other streams or merging 
+ them with existing states, to derive a model that works for solving their business uses cases. Consumers can }
+also engage the producer teams to request that additional information be added to the public model or for 
+clarification on certain fields and values
+
+--.. Making multiple Copies of Data Is bad
+
+this objection, ironically, is implicitly in apposition of then first argument. Though just like the
+previus argument, it does have a grain of truth. Multiple copies of the same data set can and do 
+inadvertencly get out of sync, become stale, or otherwise provide a source of data that is in 
+disagreement with  original source.
+
+There are three main subtypes of this argument.
+
+--... there should only be a single master copy of the data , and all systems should reference it directly.
+
+these belief fails to account for the fact that big data aanlytics teams worlwide have a already been 
+violating.
+--... IT'S too computationally expensive to create, store, and multiple copiess of te same data.
+
+--... MAnaging informati securtity policies across systems and distributed data sets is too hardware
+
+--.. eVENTUAL cONSISTENCY IS TOO DIFFICULT TO MANAGE.
+
+Evewnts from the basis of communication i event-driven architectures and fuyndamentally shape the space in which 
+we solve our problems. Events, as delivered through evet streams, form the building blocks for building asyncronous 
+and reactive systems.
+
+The following chapters will dig deeper into building and using an event-driven data mesh.
+We'll explore how to design wvents, including state, action, and notification events, as well aspatterns 
+for producing and consuming them.
+
+one of the best things about this architecture is that it's modular and incremental, and you can start 
+leveraging the benefits in one sector of your business at a time.
+
+
+
+Chapter 2 DAta mesh 
+
+DAta mesh draws a direct parallel to the microservices arcitecture- but data sets, instead of services.
+
+The benefits of a well-built data mesh include:
+• Discovering trustworthy and reliable data, making it cheaper and faster to put it
+into use.
+• Making it easier to publish new data sources, such that others can make use of
+them quickly and easily.
+• Treating data as a first-class product, just like any other mission-critical product,
+including dedicated resourcing, well-defined responsibilities, SLAs, and product release cycles.
+• Reducing and eventually eliminating unreliable, fragile, and expensive data pipe‐
+lines and ETLs.
+• Eliminating data inconsistencies between analytics and operational systems by
+using event streams as the single source of truth
+
+Data mesh relie son four interrelated principles.with the role event-driven data plays in them.
+
+-- Principle 1: Domain Ownership
+
+Domain ownership is all about enforcing sovereignty over one’s own domain, without
+having to seek approval or permission from others to change or modify it.
+
+ “Who is in charge of this data
+set?” by unequivocally answering, “the domain owner.” But with total ownership
+comes an important set of responsibilities: to export a selection of internal domain
+data in a mode suitable for use by those outside your domain boundarie
+
+In a data mesh, the owner of that data becomes responsible for making it readily
+available—it is no longer up to prospective users of the data to try to figure out the
+means to access it.
+
+one, the team that owns the source data is the best qualified to
+determine what parts of the model should (and should not) be exposed to down‐
+stream consumers. 
+
+Secondly, establishing data ownership at the source formalizes the
+boundaries of responsibility, simplifying the ownership issues that have plagued tra‐
+ditional centralized data teams.
+
+--** Domain-Driven Design in Brief
+Is a software design approach applied to data and doamin mdeling. It focuses on modeling the 
+structure and language of software model to match that of the business domain.
+
+DDDs how to share sata between systems. distinguishing between data in here and data out there is
+essentialfor anvigating the social changes and delegation of responsability necessary for data mesh 
+to succeed.
+
+Domain, as in domain-driven design. A domai is the area of interest or concern over which a person 
+or team has control, including all of the entitie, agregates,bussines logic, and context that compose it.
+
+Bounded context. Is defined as the boundary within doamin where the domain model applies.  In practice, a 
+bounded context also contain what's known as a ubiquitous language, which describes every component 
+within the boundary, including how t can be identified, its relations to other components, and how it's modeled.
+
+Ubiquitous language is ubiquitous only within the bounded
+context—in another bounded context, the same term may (and
+often does) mean something different. Subtly different meanings
+may cause confusion and inconsistent data interpretation and
+usage
+
+Entities are uniquely identifiable things or items that are defined within the domain. These are best 
+thought of as objects with unique attributes that often change and evolve over time.
+
+Aggreagte is a cluster of entities that can be treated as a single unit. To compose this order aggregate,
+howevwer, you need to apply domain-specific busssines logic to integrate into the aggregate. 
+
+Showss a siplified automotive manufacturing domain, with a single bounded context containig entities, 
+aggregates, and bussines logic. Each entity, aggregate, and process has a fully consistent meaning withinthe boundary, 
+and any exposure ot  the inner data to teh outside world is through the anti-corruption layer,
+
+**-- Selecting the Data TO EXPOSE from your Domain.
+
+Deciding what data to expose from your domain can be a bit tricky. One of the best places to start is to 
+identify the entitiess that are fundamental to your domain, as they are often good first candidates to 
+evaluate. Since this domain  also maps to the physical world, it would be reasonable to also exposethe
+current inventory to ensure that stockon hand is corectly displayted to our end users.
+
+We would also likely expose select payment information as its own data set because this qould provide 
+important information for finance teams.
+
+** Principle 2: Data as a Product
+Elevates data to the status of first-class citizen, the same as any other product created by the organization.
+The domain owners are responsible for identifying, extracting, and modeling their data to present as a data
+product for external access.
+
+These four cmponents are:
+1.- Code 
+2.- Data 
+3.- Infraestructure 
+4.- output port
+
+we'll streamline the creation and management of data products, musch like we do with microservices, to 
+reduce the overhead and toil of each data product owner.we'll cover self services, but keep it in mind 
+as we talk about serving data as product.
+
+Factors to consider when building data products, 
+* DP must provide immutable and time-stamped data, such that consumers obtain consistently reproducible results.
+* DP are multimoddal, though some modes suit certain uses cases beter than others.
+* Depending on the mode, you may end upo needing to pull data via query, or your data may be pushed
+to you via subscription.
+* DP are constructed in alignment with the source domain, an aggreagtion, or the consumer domain,
+further affecting use case possibilities.
+
+**-- DP provide immutable and time-stamped data 
+Consumers must obtai a consistent result when queryng the data, regardless of when tjhe query is executed.	
+
+.
+A third option, enabled by event streams, is to publish the late data as soon as it
+arrives. The late data is published as an event with the accurate but late timestamp of
+its occurrence. A stream consumer will see the event timestamps steadily increasing
+until they hit the late event, at which point they can choose their own course of action
+for handling it
+
+**-- DP Are Multimodal
+
+in te meantime, the same data product can be served up in a number of different formats and APIs.
+A sinlge data product may be:
+
+- Produced to an event stream and updated as canges occur
+- composed into sert of parquet files, updated daily to a cloud storage bucket.
+- Ramin stored behind a REST API, provided to clients on demand.
+
+Batch-computed data products do have a palce in a data mesh. the vast majoprity of analytical workloads have 
+been built extensively on batch-compúted data sources.
+
+**-- Accessing a DP via Push or Pull
+
+Pul is most used. Data is stored  behind some from of query-handling interface and eventually, a consumer
+client will issue a query to pull that data into its domain.
+
+Pull-based data APIs lead to periodic querying and processing of large amounts of data in parallel: 
+high throughput, but also high latency.
+
+the push mechanism, as provided by the event stream, notifies down‐
+stream services when new data is available. A service need only subscribe to the event
+stream to be registered as a listener and be notified shortly after a new event is avail‐
+able for consumption.
+
+**-- The three Dp Aligment types
+
+DP can be aligned to the source domain, to an aggregate, or to the consumer domain.
+
+***/// Source-aligned DP
+Are aligned to the operational system of source domain and are ideal candidates for powering both 
+event-driven operational and analytical system.
+
+***/// Aggregate-aligned DP
+Provide an aggregatio of multple data points  against specific business critera. The DP owner is responsible
+for building the aggregation, but will need to cnsult with the intended consumers to ensure that they 
+ have a common understanding of the aggreagte
+ 
+***/// Consumer -aligment DP
+is highly customized and built to serve a specific use case for a single domain. Then process it through a 
+set of complex business logic to get data ready for further use within its domain.
+
+Aggregate-aligment DP are the result of the domain owner applying businness logic to inteernal domain data.
+This is quite oftren in the name of usability.
+
+Consumer-aligned data products are a recognition that a data product owner cannot
+possibly provide every consumer with all the data it needs. In fact, one of the most
+common reasons for creating a consumer-aligned data product is to mix data prod‐
+ucts from several distinct domains together, where no single data product owner
+could have provided it on their own. Consumer-aligned data products are highly
+focused on serving the specific domain needs of the consumer, be it for just one
+application or for several applications within their domain.
+
+The Consumer-aligment DP, if powered by event streams, , provides a realtime updated data product for 
+products that the shipping domain can send out tocustomers, powering both the shipping service and the 
+shipping analytics service aggregated to highlight key performance indicators to monitor overall shipment 
+domain help.
+
+Event streams provide an optimal solution for driving both operational and analytical use cases.
+
+**-- Event-Drivemn Data Product as Inputs for Operational Systems
+DP may be used to serve both analytical and operational use cases, but suitability depends heavily on the 
+modality of the data product and the latency tolerance of the operational consumers.
+
+Promoting event-stream DP as a menas of powering operational Systems makes for a strong selling point for 
+buildng internal orgaizational support for data mesh
+
+**-- Principle 3: Federateed Governance
+
+Creating data products requires that domain owners have a degree of autonomy in
+modeling, building, and delivering data to their consumers. However, by empowering
+them with autonomy and independence, you run the risk of a significant technologi‐
+cal sprawl across data product implementations, making it more difficult for consum‐
+ers to use the data products for their own ends. Federated governance focuses on
+finding an equilibrium between the needs of the consumers, the autonomy of the data
+product owners, the business compliance and security requirements, and global data
+product requirements.
+
+Federated governance can be roughly broken down into two main tasks. The first is
+establishing cross-organization policies, including data product standards and data
+handling requirements, that apply to all users of the data mesh. The second is provid‐
+ing guidance on creating and using data products with self-service tools to make it
+easy to participate in the data mesh.
+
+Scorpion......
+Building a data mesh with a wide range of technologies, languages,
+conventions, and APIs makes it difficult to use and support. A
+well-built data mesh is quite similar to a well-built microservice
+platform. The fewer technology choices you support, the easier it is
+to build support tooling and apply access controls, security meas‐
+ures, and data management policies. Finding the balance point
+between which technologies you’ll provide first-class support for,
+and those which you will not, is one of most contentious points of
+federated governance. It requires a healthy and fact-based debate to
+be successful.
+
+///*** Specifying Data Product Language, Framework, and API Support
+But this comes at the incremental expense of requiring additional
+long-term support, such as monitoring integration, testing frameworks, and domain
+expertise. The types of data products, the data format, and the schema technologies
+used are just a few examples of the standards under the purview of federated gover‐
+nance.
+
+///*** Establishing Data Product Life Cycle Requirements
+A data product has a life cycle just like any other product. Federated governance is
+responsible for outlining precisely how a data product owner goes about publishing it
+to the data mesh. Specifying the data product metadata to collect, determining quality
+and SLA classifications, and establishing the publishing process are only a few exam‐
+ples of the necessary life cycle requirements.
+It is important to streamline this process and ensure that every participant in the data
+mesh is aligned and shares the same expectations.
+
+///*** Establishing Data Handling and Infosec Policies
+Data handling policies are varied and heavily influenced by regional laws, such as
+General Data Protection Regulation (GDPR) and the California Consumer Privacy
+Act (CCPA). 
+
+///*** Identifying and Standardizing Cross-Domain Polysemes
+Domains often have different yet similar definitions for common business entities.
+Identifying and standardizing these across domains is an important step to ensuring
+interoperability of data products. Standardizing polysemes to use a common identi‐
+fier is the responsibility of the federated governance team and makes using data prod‐
+ucts much simpler and less prone to user error.
+
+///*** Formalizing Self-Service Platform Requirements
+The self-service tools that underpin the day-to-day functionality of data mesh are
+guided by the federated requirements. Relying on common tooling reduces the barri‐
+ers for creating, publishing, discovering, and using data products. These requirements are 
+codified and provided to the self-service platform team to build out the necessary tooling to support 
+data mesh.
+
+//** Principle 4: Self-Service Platform
+Self-service is the final principle underpinning data mesh. 
+Their needs will help inform your own decisions about how to build your selfservice platform. 
+The three main user roles include:
+
+1.- Prospective Consumer
+Consumers must be able to find the data products they need, subscribe as con‐
+sumers, and extract/acquire the data into their own domains.
+2.- Data product creators
+These folks want to use the self-service platform for support in creating their data
+product. 
+3.- Data product owners
+Owners must be able to manage their data products long term. This includes
+notifying existing consumers of upcoming changes, handling feature requests,
+issuing guidance on breaking changes, managing alerts and on-call rotations, and
+managing the data product life cycle, such as deprecation and deletion.
+
+crow....
+The stricter your federated governance requirements around the
+modality of your data products, the easier it is to build the selfservice platform. 
+A self-service platform that enables just one or
+two data product formats with very opinionated processing frame‐
+works is much easier to support than myriad options. This is a
+hard-learned lesson from the microservices world, and it’s one that
+we would do well to apply to data mesh.
+
+
+//-- Discovering DP and Dependencies
+Everyone participating in the data mesh needs to be able to easily browse, search, and
+find available data products. This includes, but is not limited to, the data product
+location, API, metadata, ownership, documentation, data samples, and links to exist‐
+ing applications that are already using it. A data catalog is a common tool for central‐
+ized lookup of available data products, with each data product owner responsible for
+updating and maintaining their records
+
+//-- Data Product Management Controls
+The self-service platform needs to standardize the management of the data product
+life cycle. Creating controls to manage data products requires integration with each of
+these services as well as ensuring compatibility among the data products published to
+the data mesh
+
+scorpion....
+The more options a self-service platform provides to data product
+owners, the more work the self-service platform team needs to do
+to ensure that the options fall in line with the governance policies,
+data security policies, and regulatory policies. For some organiza‐
+tions, this may simply mean that they’ll leave it up to the data prod‐
+uct owners to figure out, because the impact of a policy failure is
+low and they simply don’t care too much. But many organizations
+do not have this luxury, and a policy breach can be an extremely
+costly and damaging scenario that must be avoided. Supporting a
+wide variety of data products increases the risk of a policy breach,
+while supporting only a few reduces the risk.
+
+// Data rpoduct Access Controls
+
+elf-service access control to data products is another area of concern. Registering for
+data product access should be easy for a consumer to do. A distinct set of credentials
+for each consumer enables permissions and access control at a per-consumer level,
+identification of dependencies, and, when combined with producer permissions, the
+ability to create a full dependency graph of who has access to what data
+
+//** Compute and Storage Resource for Building and Using DP
+
+Composing a DP can require additional compute and data storage resources beyond what is already available 
+to te sorce domain.
+
+Is highly implementtion-dependent and will vary significantly depending on the tools and technologies. we need
+the ability to easily requisitiona n event stream to write our event to.
+
+There are a whole host of controls that users of the self-service data mesh may need
+access to. Users may need to specify the topic ownership via access controls, duration
+of record retention (infinite, for the majority of cases), and permission restrictions for
+who can and cannot read the data. Users must also be able to associate the Kafka
+topic with the data product metadata, so that it is easily discoverable and has welldocumented schema 
+and documentation.
+
+I may decide to select the  following teto select the following technlogies to helkp me built my data mesh:
+
+* Stream Processing 
+A native event-stream processor such as Kafka Streams or Apache Flink. Both
+provide a framework for handling data products provided through Kafka topics,
+including rich functionality such as stream-table and table-table joins
+
+* Batch Processing
+A big data processing framework that can handle large amounts of batch data,
+with some bonus points for also being able to handle some streaming use cases
+(e.g., Apache Spark, Apache Flink). These frameworks can make it easier to use
+data products provided by periodically updated batch data sets or those served
+via a mixture of batch data and event streams.
+
+* Stream <--> batch data procesing
+A tool to translate data from streams to batch data or vice versa. Kafka Connect is
+a prime example of this technology, where you can use a variety of connectors to
+put batch data into a Kafka topic for streaming use or take data from an event
+stream and write it into a batch data store
+
+**--Providing Self-Services Through SaaS
+
+For a data mesh, they ideally provide easy-to-use services
+right out of the box for accessing data, transforming it in some way, and writing it
+back to a data storage location. Here are a few examples:
+
+* Confluent wth Apache KafkaApache kafka is an open source sidtributed event streaming platformused by 
+thousands of companies for highperformance data pipelines, streaming analytics, data integration 
+and mission critical aplication.
+
+* Star Tree with Apache Pinot
+A huge supporter of dehghanis's Data mesh paradigm,StarTree oofers Apache Pinot and supportive tooling as a
+services. Is described a distributed OLAP datastore, which is used to salable real-time analytics with low 
+altency.
+
+* Databricks with Apache Spark
+Apache Spark is a multilñanguage engine for excuting data engineering data science, and machine learning on
+single-node machines  or clusters.

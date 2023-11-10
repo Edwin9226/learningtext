@@ -1,0 +1,20 @@
+Web Scraping Recopilación de BD ae informacion de páginas web.
+
+
+MArketing Digital
+
+Ataque Cross Site 
+
+CSRF garantiza la protección entre le frontend y Backend.   LA protección CSRF garantiza 
+que ningún atacante se interponga en el medio.
+ 
+ 
+ Frontend envia una solicitud al backend, el navegador envia todas las cookies relacionadas
+ con este backend.
+ 
+ Estas cookies contienen la información de autentificación, la información de la 
+ sesión.
+ 
+ EL forntend no tiene nada que hacer,por que elcomportamiento predeterminado es 
+evitar que js acceda o manipule las cookies. 
+

@@ -1,0 +1,8 @@
+new file:   src/assets/index.ts
+        new file:   src/components/index.ts
+        new file:   src/data/index.ts
+        new file:   src/models/index.ts
+        new file:   src/pages/index.ts
+        new file:   src/redux/index.ts
+        new file:   src/styled-components/index.ts
+        new file:   src/utilities/index.ts
